@@ -1,4 +1,5 @@
-// layout.js - Script để tải header và footer
+// layout.js 
+// Lắng nghe sự kiện load DOM
 document.addEventListener("DOMContentLoaded", function () {
   // Tải header
   fetch("./components/header.html")

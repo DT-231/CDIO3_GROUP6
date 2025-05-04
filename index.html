@@ -37,6 +37,7 @@
         -moz-appearance: textfield;
       }
     </style>
+    <!-- Dùng để load component header và footer -->
     <script src="./js/layout.js"></script>
   </head>
   <body>
@@ -50,7 +51,7 @@
         class="bg-[#E1E7FF] 2xl:max-w-4xl md:max-w-xl mx-auto my-5 md:h-60 2xl:h-80 flex justify-center items-center rounded-lg"
       >
         <div
-          class="bg-primary rounded-lg p-6 text-center md:h-50 md:max-w-xl 2xl:max-w-3xl 2xl:h-70 mx-auto"
+          class="bg-primary rounded-lg p-3 text-center md:h-50 md:max-w-xl 2xl:max-w-3xl 2xl:h-70 mx-auto"
         >
           <h3 class="text-white md:text-3xl font-bold mb-3">
             Bạn muốn đi đâu ?
@@ -61,6 +62,7 @@
             <div class="flex flex-row gap-5">
               <input
                 type="text"
+                id="searchLocation"
                 placeholder="Bạn muốn đi đâu ?..."
                 class="bg-[#F2F6F9] md:w-3xs 2xl:w-md md:h-[40px] 2xl:h-[60px] rounded-lg px-5 font-openSans font-semibold 2xl:text-xl"
               />
@@ -82,7 +84,7 @@
                     <i class="fa-solid fa-minus"></i>
                   </button>
                   <input
-                    id="input-qty-person"
+                    id="inputQtyPerson"
                     value="1"
                     type="number"
                     placeholder="1"
@@ -101,14 +103,20 @@
             </div>
             <div class="flex flex-row gap-5">
               <input
+                id="InputcheckIn"
+                onchange="validateCheckIn()"
                 type="date"
                 class="bg-[#F2F6F9] md:w-[150px] md:h-[40px] 2xl:h-[60px] 2xl:w-[230px] rounded-lg px-3 2xl:text-xl font-openSans font-semibold"
               />
               <input
+                onchange="validateDateRange()"
+                id="InputcheckOut"
                 type="date"
                 class="bg-[#F2F6F9] md:w-[150px] md:h-[40px] 2xl:h-[60px] 2xl:w-[230px] 2xl:text-xl rounded-lg px-3 font-openSans font-semibold"
               />
               <button
+                onclick="handleSubmit()"
+                id="btnSearch"
                 class="bg-primary md:w-[120px] md:h-[40px] 2xl:h-[60px] 2xl:w-[170px] rounded-lg font-bold font-openSans text-xl text-white 2xl:text-2xl cursor-pointer hover:bg-primary/90"
               >
                 Tìm kiếm
@@ -117,10 +125,11 @@
           </div>
         </div>
       </section>
-      <!-- content của web ghi vào đây -->
     </main>
     <!-- Phần container cho footer -->
     <div id="footer-container"></div>
+
+    <!-- Chức năng tìm kiếm và validateInput -->
     <script src="./js/index.js"></script>
   </body>
 </html>
