@@ -1,0 +1,46 @@
+/* Cho Chrome */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+/* Cho Microsoft Edge */
+input[type="password"]::-ms-reveal {
+  display: none;
+}
+
+/* Cho các trình duyệt khác như Firefox, Safari */
+input[type="password"] {
+  /* Một số trường hợp có thể cần thêm */
+  -webkit-text-security: disc !important;
+}
+
+
+
+/* Áp dụng cụ thể cho trường password của bạn */
+/* tat an hien password */
+#password::-ms-reveal,
+#password::-webkit-contacts-auto-fill-button,
+#password::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+/* custome css radio */
+.radio-circle {
+  transition: all 0.2s ease-in-out;
+}
+.radio-dot {
+  transform: scale(0);
+  transition: transform 0.2s ease-in-out;
+}
+input[type="radio"]:checked + .radio-circle {
+  background-color: #4f46e5; /* Màu primary */
+  border-color: #4f46e5;
+}
+input[type="radio"]:checked + .radio-circle .radio-dot {
+  transform: scale(1);
+}

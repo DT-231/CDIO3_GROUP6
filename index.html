@@ -22,6 +22,7 @@
     <style type="text/tailwindcss">
       @theme {
         --color-primary: #2464ec;
+        --color-secondary: #e1e7ff;
 
         --font-poppins: "Poppins", "sans-serif";
         --font-openSans: "Open Sans", "sans-serif";
@@ -45,10 +46,10 @@
     <div id="header-container"></div>
 
     <!-- phần container cho content -->
-    <main class="h-screen">
+    <main class="max-h-lvh p-5">
       <!-- Tìm kiếm -->
       <section
-        class="bg-[#E1E7FF] 2xl:max-w-4xl md:max-w-xl mx-auto my-5 md:h-60 2xl:h-80 flex justify-center items-center rounded-lg"
+        class="bg-secondary 2xl:max-w-4xl md:max-w-xl mx-auto my-5 md:h-60 2xl:h-80 flex justify-center items-center rounded-lg"
       >
         <div
           class="bg-primary rounded-lg p-3 text-center md:h-50 md:max-w-xl 2xl:max-w-3xl 2xl:h-70 mx-auto"
@@ -84,6 +85,7 @@
                     <i class="fa-solid fa-minus"></i>
                   </button>
                   <input
+                    readonly
                     id="inputQtyPerson"
                     value="1"
                     type="number"
@@ -122,6 +124,65 @@
                 Tìm kiếm
               </button>
             </div>
+          </div>
+        </div>
+      </section>
+      <!--  -->
+      <section class="mt-10">
+        <div>
+          <h3 class="text-center text-3xl font-openSans font-bold">
+            Tính năng nổi bật
+          </h3>
+          <div
+            class="flex gap-5 md:flex-row flex-col justify-center items-center mt-10 max-w-4xl mx-auto"
+          >
+            <article
+              class="bg-white flex flex-col justify-center items-center gap-3 w-md max-h-[300px] p-5 shadow-md"
+            >
+              <p
+                class="w-[50px] h-[50px] bg-[#D9D9D9] rounded-full flex justify-center items-center"
+              >
+                <img src="./imgs/iconKinhLup.png" alt="" class="w-[30px]" />
+              </p>
+              <h5 class="text-center text-xl font-openSans font-bold">
+                Tìm kiếm dễ dàng
+              </h5>
+              <p class="text-center text-sm">
+                Tìm kiếm phòng với sở thích của bạn một cách nhanh chóng
+              </p>
+            </article>
+
+            <article
+              class="bg-white flex flex-col justify-center items-center gap-3 w-md max-h-[300px] p-5 shadow-md"
+            >
+              <p
+                class="w-[50px] h-[50px] bg-[#D9D9D9] rounded-full flex justify-center items-center text-3xl"
+              >
+                🏨
+              </p>
+              <h5 class="text-center text-xl font-openSans font-bold">
+                Đặt phòng trực tuyến
+              </h5>
+              <p class="text-center text-sm">
+                Đặt phòng trực tuyến chỉ với vài cú nhấp chuột
+              </p>
+            </article>
+
+            <article
+              class="bg-white flex flex-col justify-center items-center gap-3 w-md max-h-[300px] p-5 shadow-md"
+            >
+              <p
+                class="w-[50px] h-[50px] bg-[#D9D9D9] rounded-full flex justify-center items-center text-3xl"
+              >
+                ⭐
+              </p>
+              <h5 class="text-center text-xl font-openSans font-bold">
+                Đánh giá chân thực
+              </h5>
+              <p class="text-center text-sm">
+                Xem đánh giá chân thực từ những khách hàng trước đây
+              </p>
+            </article>
           </div>
         </div>
       </section>
