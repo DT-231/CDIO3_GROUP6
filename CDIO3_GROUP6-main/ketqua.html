@@ -1,0 +1,819 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>BookingRooms</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background-color: #e6ebf9;
+        color: #222;
+      }
+      a {
+        text-decoration: none;
+        color: #2a6ad1;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .header {
+        background-color: #2a6ad1;
+        color: white;
+        padding: 12px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .header .logo {
+        font-weight: 700;
+        font-size: 16px;
+      }
+      .header .user {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .header .user i {
+        font-size: 18px;
+      }
+      .header .user .name {
+        background-color: white;
+        color: #2a6ad1;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 20px;
+        padding: 4px 12px;
+        max-width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      main {
+        max-width: 960px;
+        margin: 20px auto 0;
+        padding: 0 12px 40px;
+      }
+
+      .search-section {
+        background-color: #dbe3fc;
+        border-radius: 8px;
+        padding: 24px 0 40px;
+        margin-bottom: 24px;
+        display: flex;
+        justify-content: center;
+      }
+      .search-box {
+        background-color: #2a6ad1;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 600px;
+        padding: 24px 24px 32px;
+        color: white;
+        box-shadow: 0 0 8px rgb(0 0 0 / 0.1);
+      }
+      .search-box h2 {
+        font-weight: 700;
+        font-size: 20px;
+        margin: 0 0 16px 0;
+        text-align: center;
+      }
+      .search-inputs {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .input-text {
+        flex: 1 1 180px;
+        background-color: white;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        color: #222;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .input-text input {
+        border: none;
+        outline: none;
+        font-weight: 600;
+        font-size: 14px;
+        color: #222;
+        flex-grow: 1;
+        background: transparent;
+      }
+      .input-text .icon-plus {
+        color: #2a6ad1;
+        font-size: 14px;
+        cursor: pointer;
+        margin-left: 8px;
+      }
+      .select-box {
+        flex: 1 1 140px;
+        background-color: white;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 14px;
+        color: #222;
+        padding: 8px 12px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+      .date-picker {
+        flex: 1 1 120px;
+        background-color: white;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        font-weight: 600;
+        font-size: 12px;
+        color: #222;
+      }
+      .date-picker i {
+        color: #222;
+        font-size: 16px;
+      }
+      .date-picker span {
+        white-space: nowrap;
+      }
+      .btn-search {
+        background-color: #2a6ad1;
+        border-radius: 6px;
+        border: none;
+        color: white;
+        font-weight: 700;
+        font-size: 14px;
+        padding: 8px 16px;
+        cursor: pointer;
+        flex-shrink: 0;
+        margin-left: 8px;
+      }
+      .btn-search:hover {
+        background-color: #1f4db8;
+      }
+
+      .content {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .filter-box {
+        background-color: white;
+        border-radius: 6px;
+        padding: 12px 16px 16px;
+        width: 160px;
+        font-weight: 700;
+        font-size: 14px;
+        box-shadow: 0 0 8px rgb(0 0 0 / 0.05);
+      }
+      .filter-box label {
+        font-weight: 600;
+        font-size: 12px;
+        margin-bottom: 4px;
+        display: block;
+      }
+      .filter-price {
+        font-weight: 400;
+        font-size: 12px;
+        margin: 4px 0 12px;
+        color: #666;
+      }
+      .filter-price input[type="range"] {
+        width: 100%;
+      }
+      .filter-price-values {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        color: #999;
+        margin-top: 4px;
+      }
+      .filter-box .btn-filter-search {
+        background-color: #2a6ad1;
+        border-radius: 6px;
+        border: none;
+        color: white;
+        font-weight: 700;
+        font-size: 12px;
+        padding: 8px 12px;
+        cursor: pointer;
+        width: 100%;
+      }
+      .filter-box .btn-filter-search:hover {
+        background-color: #1f4db8;
+      }
+
+      .listings {
+        flex: 1 1 0;
+        min-width: 0;
+      }
+      .listings-header {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .listings-header .sort-select {
+        font-weight: 600;
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+      }
+
+      .listing-item {
+        background-color: white;
+        border-radius: 6px;
+        box-shadow: 0 0 8px rgb(0 0 0 / 0.05);
+        margin-bottom: 16px;
+        display: flex;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+      .listing-item img {
+        width: 120px;
+        height: 90px;
+        border-radius: 6px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+      .listing-info {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .listing-title {
+        font-weight: 700;
+        font-size: 14px;
+        color: #2a6ad1;
+        margin: 0 0 4px 0;
+      }
+      .listing-location {
+        font-weight: 600;
+        font-size: 12px;
+        color: #2a6ad1;
+        margin: 0 0 4px 0;
+      }
+      .listing-location + span {
+        font-weight: 400;
+        font-size: 12px;
+        color: #666;
+      }
+      .stars {
+        color: #f5b301;
+        font-size: 12px;
+        margin: 4px 0 4px 0;
+      }
+      .reviews {
+        font-weight: 600;
+        font-size: 10px;
+        color: #666;
+        margin-left: 4px;
+      }
+      .room-info {
+        font-weight: 600;
+        font-size: 12px;
+        margin: 4px 0 0 0;
+        color: #222;
+      }
+      .room-info div {
+        margin-top: 2px;
+      }
+      .free-cancel {
+        font-weight: 600;
+        font-size: 10px;
+        color: #3ca14a;
+        margin-top: 4px;
+      }
+
+      .price-section {
+        flex-shrink: 0;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .price {
+        font-weight: 700;
+        font-size: 14px;
+        color: #222;
+      }
+      .price-sub {
+        font-weight: 400;
+        font-size: 10px;
+        color: #999;
+        margin-top: 2px;
+      }
+      .btn-details {
+        background-color: #2a6ad1;
+        border-radius: 6px;
+        border: none;
+        color: white;
+        font-weight: 700;
+        font-size: 12px;
+        padding: 8px 16px;
+        cursor: pointer;
+        margin-top: 8px;
+        align-self: flex-start;
+      }
+      .btn-details:hover {
+        background-color: #1f4db8;
+      }
+
+      .pagination {
+        text-align: center;
+        margin-top: 12px;
+        margin-bottom: 40px;
+      }
+      .pagination button {
+        background: none;
+        border: none;
+        font-weight: 600;
+        font-size: 14px;
+        color: #2a6ad1;
+        cursor: pointer;
+        margin: 0 6px;
+        padding: 4px 8px;
+        border-radius: 50%;
+      }
+      .pagination button.active {
+        background-color: #2a6ad1;
+        color: white;
+      }
+      .pagination button:focus {
+        outline: none;
+      }
+
+      footer {
+        background-color: #2a6ad1;
+        color: white;
+        padding: 20px 12px;
+        font-size: 12px;
+      }
+      footer .footer-container {
+        max-width: 960px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        justify-content: space-between;
+      }
+      footer .footer-section {
+        flex: 1 1 200px;
+        min-width: 160px;
+      }
+      footer .footer-section h3 {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 12px;
+      }
+      footer .footer-section p,
+      footer .footer-section a {
+        font-weight: 400;
+        font-size: 12px;
+        color: white;
+        margin: 4px 0;
+        display: block;
+      }
+      footer .footer-section a:hover {
+        text-decoration: underline;
+      }
+      footer .social-icons {
+        display: flex;
+        gap: 12px;
+        margin-top: 8px;
+      }
+      footer .social-icons a {
+        color: white;
+        font-size: 18px;
+      }
+      footer .social-icons a:hover {
+        color: #a3c0f9;
+      }
+
+      @media (max-width: 768px) {
+        .content {
+          flex-direction: column;
+        }
+        .filter-box {
+          width: 100%;
+          max-width: 320px;
+          margin: 0 auto 24px;
+        }
+        .listings {
+          width: 100%;
+        }
+        .listing-item {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .listing-item img {
+          width: 100%;
+          max-width: 320px;
+          height: 180px;
+          border-radius: 6px;
+        }
+        .listing-info {
+          align-items: center;
+        }
+        .price-section {
+          text-align: center;
+          margin-top: 12px;
+          align-items: center;
+        }
+        .search-box {
+          padding: 20px 16px 28px;
+        }
+        .search-inputs {
+          flex-direction: column;
+          gap: 12px;
+        }
+        .input-text,
+        .select-box,
+        .date-picker {
+          flex: 1 1 100%;
+        }
+        .btn-search {
+          margin-left: 0;
+          width: 100%;
+          margin-top: 8px;
+        }
+        footer .footer-container {
+          flex-direction: column;
+          gap: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header" role="banner">
+      <div aria-label="BookingRooms logo" class="logo">BookingRooms</div>
+      <div aria-label="User profile and name" class="user">
+        <i aria-hidden="true" class="fas fa-user-circle"> </i>
+        <div class="name" title="Nguyễn Văn...">Nguyễn Văn...</div>
+      </div>
+    </header>
+    <main>
+      <section aria-labelledby="search-title" class="search-section">
+        <form
+          aria-describedby="search-desc"
+          class="search-box"
+          onsubmit="return false;"
+          role="search"
+        >
+          <h2 id="search-title">Bạn muốn đi đâu ?</h2>
+          <div class="sr-only" id="search-desc">
+            Form tìm kiếm phòng khách sạn
+          </div>
+
+          <div class="search-inputs">
+            <div
+              aria-label="Bạn muốn đến đâu"
+              class="input-text"
+              role="textbox"
+            >
+              <input
+                aria-label="Bạn muốn đến đâu"
+                placeholder="Bạn muốn đến đâu"
+                type="text"
+              />
+              <i
+                aria-hidden="true"
+                class="fas fa-plus icon-plus"
+                role="button"
+                tabindex="0"
+                title="Thêm điểm đến"
+              >
+              </i>
+            </div>
+            <select aria-label="Số lượng người lớn" class="select-box">
+              <option>1 người lớn</option>
+              <option>2 người lớn</option>
+              <option>3 người lớn</option>
+              <option>4 người lớn</option>
+            </select>
+            <div aria-label="Ngày nhận phòng" class="date-picker">
+              <i aria-hidden="true" class="fas fa-calendar-alt"> </i>
+              <span> 2 , tháng 6 </span>
+            </div>
+            <div aria-label="Ngày trả phòng" class="date-picker">
+              <i aria-hidden="true" class="fas fa-calendar-alt"> </i>
+              <span> 3 , tháng 6 </span>
+            </div>
+            <button aria-label="Tìm kiếm" class="btn-search" type="submit">
+              Tìm kiếm
+            </button>
+          </div>
+        </form>
+      </section>
+      <section aria-label="Danh sách phòng và bộ lọc" class="content">
+        <aside aria-label="Bộ lọc giá" class="filter-box">
+          <div>Bộ lọc</div>
+          <label for="price-range"> Khoảng giá </label>
+          <div class="filter-price">
+            <input
+              aria-label="Khoảng giá từ 100,000 đến 1,000,000 VND"
+              aria-valuemax="1000000"
+              aria-valuemin="100000"
+              aria-valuenow="100000"
+              id="price-range"
+              max="10000000"
+              min="0"
+              step="10000"
+              type="range"
+            />
+          </div>
+          <div aria-hidden="true" class="filter-price-values">
+            <span> 0 VND </span>
+            <span> 10,000,000 VND </span>
+          </div>
+          <button
+            aria-label="Tìm kiếm theo bộ lọc"
+            class="btn-filter-search"
+            type="button"
+          >
+            Tìm kiếm
+          </button>
+        </aside>
+        <section aria-label="Danh sách khách sạn tại Đà Nẵng" class="listings">
+          <div class="listings-header">
+            <div>Đà nẵng : Tìm thấy 30 chỗ nghỉ</div>
+            <select aria-label="Sắp xếp danh sách" class="sort-select">
+              <option>Sắp xếp</option>
+              <option>Giá thấp đến cao</option>
+              <option>Giá cao đến thấp</option>
+              <option>Đánh giá tốt nhất</option>
+            </select>
+          </div>
+          <article
+            aria-label="Hotel Novotel Đà Nẵng Trung tâm thành phố, giá 4 triệu VND"
+            class="listing-item"
+            tabindex="0"
+          >
+            <img
+              alt="Ảnh bên ngoài khách sạn Hotel Novotel Đà Nẵng có mái ngói truyền thống, cây xanh xung quanh"
+              height="90"
+              src="imgs/chitiet.png"
+              width="120"
+            />
+            <div class="listing-info">
+              <a class="listing-title" href="#"> Hotel Novotel </a>
+              <a
+                aria-label="Địa điểm Đà Nẵng"
+                class="listing-location"
+                href="#"
+              >
+                Đà Nẵng
+              </a>
+              <span> Trung tâm thành phố </span>
+              <div aria-label="5 sao" class="stars">
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <span class="reviews"> (23 Đánh giá) </span>
+              </div>
+              <div class="room-info">
+                <div>
+                  <strong> Phòng Deluxe </strong>
+                </div>
+                <div>1 Giường đôi</div>
+                <div>1 Giường đơn</div>
+              </div>
+              <div class="free-cancel">Miễn phí hủy</div>
+            </div>
+            <div class="price-section">
+              <div aria-label="Giá 4 triệu VND" class="price">
+                VND 4,000,000
+              </div>
+              <div class="price-sub">đã bao gồm thuế và phí</div>
+              <button
+                aria-label="Xem chi tiết Hotel Novotel"
+                class="btn-details"
+                type="button"
+              >
+                Xem chi tiết
+              </button>
+            </div>
+          </article>
+          <article
+            aria-label="Hotel Novotel Đà Nẵng Trung tâm thành phố, giá 4 triệu VND"
+            class="listing-item"
+            tabindex="0"
+          >
+            <img
+              alt="Ảnh bên ngoài khách sạn Hotel Novotel Đà Nẵng có mái ngói truyền thống, cây xanh xung quanh"
+              height="90"
+              src="imgs/chitiet.png"
+              width="120"
+            />
+            <div class="listing-info">
+              <a class="listing-title" href="#"> Hotel Novotel </a>
+              <a
+                aria-label="Địa điểm Đà Nẵng"
+                class="listing-location"
+                href="#"
+              >
+                Đà Nẵng
+              </a>
+              <span> Trung tâm thành phố </span>
+              <div aria-label="5 sao" class="stars">
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <span class="reviews"> (23 Đánh giá) </span>
+              </div>
+              <div class="room-info">
+                <div>
+                  <strong> Phòng Deluxe </strong>
+                </div>
+                <div>1 Giường đôi</div>
+                <div>1 Giường đơn</div>
+              </div>
+              <div class="free-cancel">Miễn phí hủy</div>
+            </div>
+            <div class="price-section">
+              <div aria-label="Giá 4 triệu VND" class="price">
+                VND 4,000,000
+              </div>
+              <div class="price-sub">đã bao gồm thuế và phí</div>
+              <button
+                aria-label="Xem chi tiết Hotel Novotel"
+                class="btn-details"
+                type="button"
+              >
+                Xem chi tiết
+              </button>
+            </div>
+          </article>
+          <article
+            aria-label="Hotel Novotel Đà Nẵng Trung tâm thành phố, giá 4 triệu VND"
+            class="listing-item"
+            tabindex="0"
+          >
+            <img
+              alt="Ảnh bên ngoài khách sạn Hotel Novotel Đà Nẵng có mái ngói truyền thống, cây xanh xung quanh"
+              height="90"
+              src="imgs/chitiet.png"
+              width="120"
+            />
+            <div class="listing-info">
+              <a class="listing-title" href="#"> Hotel Novotel </a>
+              <a
+                aria-label="Địa điểm Đà Nẵng"
+                class="listing-location"
+                href="#"
+              >
+                Đà Nẵng
+              </a>
+              <span> Trung tâm thành phố </span>
+              <div aria-label="5 sao" class="stars">
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <span class="reviews"> (23 Đánh giá) </span>
+              </div>
+              <div class="room-info">
+                <div>
+                  <strong> Phòng Deluxe </strong>
+                </div>
+                <div>1 Giường đôi</div>
+                <div>1 Giường đơn</div>
+              </div>
+              <div class="free-cancel">Miễn phí hủy</div>
+            </div>
+            <div class="price-section">
+              <div aria-label="Giá 4 triệu VND" class="price">
+                VND 4,000,000
+              </div>
+              <div class="price-sub">đã bao gồm thuế và phí</div>
+              <button
+                aria-label="Xem chi tiết Hotel Novotel"
+                class="btn-details"
+                type="button"
+              >
+                Xem chi tiết
+              </button>
+            </div>
+          </article>
+          <article
+            aria-label="Hotel Novotel Đà Nẵng Trung tâm thành phố, giá 4 triệu VND"
+            class="listing-item"
+            tabindex="0"
+          >
+            <img
+              alt="Ảnh bên ngoài khách sạn Hotel Novotel Đà Nẵng có mái ngói truyền thống, cây xanh xung quanh"
+              height="90"
+              src="imgs/chitiet.png"
+              width="120"
+            />
+            <div class="listing-info">
+              <a class="listing-title" href="#"> Hotel Novotel </a>
+              <a
+                aria-label="Địa điểm Đà Nẵng"
+                class="listing-location"
+                href="#"
+              >
+                Đà Nẵng
+              </a>
+              <span> Trung tâm thành phố </span>
+              <div aria-label="5 sao" class="stars">
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <i aria-hidden="true" class="fas fa-star"> </i>
+                <span class="reviews"> (23 Đánh giá) </span>
+              </div>
+              <div class="room-info">
+                <div>
+                  <strong> Phòng Deluxe </strong>
+                </div>
+                <div>1 Giường đôi</div>
+                <div>1 Giường đơn</div>
+              </div>
+              <div class="free-cancel">Miễn phí hủy</div>
+            </div>
+            <div class="price-section">
+              <div aria-label="Giá 4 triệu VND" class="price">
+                VND 4,000,000
+              </div>
+              <div class="price-sub">đã bao gồm thuế và phí</div>
+              <button
+                aria-label="Xem chi tiết Hotel Novotel"
+                class="btn-details"
+                type="button"
+              >
+                Xem chi tiết
+              </button>
+            </div>
+          </article>
+          <nav aria-label="Phân trang danh sách khách sạn" class="pagination">
+            <button aria-label="Trang trước">&lt;&lt;</button>
+            <button aria-current="page" class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+            <button aria-label="Trang tiếp">&gt;&gt;</button>
+          </nav>
+        </section>
+      </section>
+    </main>
+    <footer role="contentinfo">
+      <div class="footer-container">
+        <section aria-labelledby="footer-bookingrooms" class="footer-section">
+          <h3 id="footer-bookingrooms">BookingRooms</h3>
+          <p>Liên hệ : Group6@gmail.com</p>
+          <p>Điện thoại : xxx xxx xxxx</p>
+        </section>
+        <section aria-labelledby="footer-links" class="footer-section">
+          <h3 id="footer-links">Liên kết</h3>
+          <a href="#"> Về chúng tôi </a>
+          <a href="#"> Điều khoản dịch vụ </a>
+        </section>
+        <section aria-labelledby="footer-follow" class="footer-section">
+          <h3 id="footer-follow">Theo dõi chúng tôi</h3>
+          <div class="social-icons">
+            <a aria-label="Facebook" href="#">
+              <i aria-hidden="true" class="fab fa-facebook-f"> </i>
+            </a>
+            <a aria-label="Instagram" href="#">
+              <i aria-hidden="true" class="fab fa-instagram"> </i>
+            </a>
+            <a aria-label="Twitter" href="#">
+              <i aria-hidden="true" class="fab fa-twitter"> </i>
+            </a>
+          </div>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>
