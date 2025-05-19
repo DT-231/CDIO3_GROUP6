@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./imgs/logo.svg" type="image/image/svg+xml" />
+    <title>BookingRooms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-primary: #2464ec;
+        --color-secondary: #f0f3f8;
+
+        --font-poppins: "Poppins", "sans-serif";
+        --font-openSans: "Open Sans", "sans-serif";
+      }
+
+      /* CSS để ẩn biểu tượng con mắt trong trường input password */
+    </style>
+    <!-- Dùng để load component header và footer -->
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <script src="./js/layout.js"></script>
+  </head>
+  <body>
+    <!-- Phần container cho header -->
+    <div id="header-container"></div>
+
+    <!-- phần container cho content -->
+    <main class="max-h-screen my-30 flex flex-col justify-center items-center">
+      <section class="w-lg shadow-sm inset-shadow-sm">
+        <div
+          class="flex flex-col gap-8 justify-center items-center px-5 py-10 rounded-sm"
+        >
+          <div>
+            <h3 class="text-primary text-3xl uppercase font-openSans font-bold">
+              Đăng nhập
+            </h3>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label
+              for="valueLogin"
+              class="pl-1 font-openSans font-semibold text-lg cursor-pointer"
+              >Email hoặc số điện thoại</label
+            >
+            <input
+              class="px-3 bg-secondary text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
+              type="text"
+              id="valueLogin"
+              placeholder="Nhập Email hoặc số điện thoại"
+            />
+            <label
+              class="pl-2 text-sm text-red-500 font-openSans font-medium"
+              id="errorMesageValueLogin"
+            >
+            </label>
+          </div>
+          <div class="flex flex-col gap-1 relative">
+            <label
+              for="password"
+              class="pl-1 font-openSans font-semibold text-lg cursor-pointer"
+            >
+              Mật khẩu
+            </label>
+            <div class="relative" id="container_password">
+              <input
+                type="password"
+                id="password"
+                class="px-3 bg-secondary text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
+                placeholder="Mật khẩu"
+                onchange="handleOnChangePassword()"
+              />
+              <span
+                id="hideShowPassword"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                onclick="togglePassword()"
+              >
+              </span>
+            </div>
+            <label
+              class="pl-2 text-sm text-red-500 font-openSans font-medium"
+              id="errorMesagePassword"
+            >
+            </label>
+          </div>
+          <div class="flex flex-row justify-between w-sm px-1">
+            <!-- Check box ghi nhớ đăng nhập -->
+            <div class="inline-flex items-center">
+              <label
+                class="flex items-center cursor-pointer relative"
+                for="check-2"
+              >
+                <input
+                  type="checkbox"
+                  checked
+                  class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border-2 border-primary checked:bg-blue-800 checked:border-blue-800"
+                  id="check-2"
+                />
+                <span
+                  class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-3.5 w-3.5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </span>
+              </label>
+              <label
+                class="cursor-pointer ml-2 text-sm font-semibold text-black"
+                for="check-2"
+              >
+                Ghi nhớ đăng nhập
+              </label>
+            </div>
+
+            <a class="text-sm font-medium text-blue-700">Quên mật khẩu</a>
+          </div>
+          <div class="flex flex-col gap-3 justify-center items-center">
+            <button
+              onclick="handleSubmit()"
+              class="bg-primary text-2xl text-white w-xs py-3 cursor-pointer rounded-lg font-openSans font-bold hover:bg-blue-700"
+            >
+              Đăng nhập
+            </button>
+            <p class="text-[#9E9E9E] font-openSans font-medium">
+              Bạn chưa có tài khoản?
+              <a
+                href="register.html"
+                class="font-openSans font-bold text-primary"
+                >Đăng ký ngay</a
+              >
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Phần container cho footer -->
+    <div id="footer-container"></div>
+
+    <!-- Chức năng tìm kiếm và validateInput -->
+    <script src="./js/login.js"></script> 
+  </body>
+</html>

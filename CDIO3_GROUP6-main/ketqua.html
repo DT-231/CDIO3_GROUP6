@@ -1,532 +1,131 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./imgs/logo.svg" type="image/svg+xml" />
     <title>BookingRooms</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
-    <style>
-      * {
-        box-sizing: border-box;
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-primary: #2464ec;
+        --color-secondary: #e1e7ff;
+
+        --font-poppins: "Poppins", "sans-serif";
+        --font-openSans: "Open Sans", "sans-serif";
       }
-      body {
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
         margin: 0;
-        font-family: "Inter", sans-serif;
-        background-color: #e6ebf9;
-        color: #222;
-      }
-      a {
-        text-decoration: none;
-        color: #2a6ad1;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      .header {
-        background-color: #2a6ad1;
-        color: white;
-        padding: 12px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .header .logo {
-        font-weight: 700;
-        font-size: 16px;
-      }
-      .header .user {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .header .user i {
-        font-size: 18px;
-      }
-      .header .user .name {
-        background-color: white;
-        color: #2a6ad1;
-        font-size: 12px;
-        font-weight: 600;
-        border-radius: 20px;
-        padding: 4px 12px;
-        max-width: 120px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
 
-      main {
-        max-width: 960px;
-        margin: 20px auto 0;
-        padding: 0 12px 40px;
-      }
-
-      .search-section {
-        background-color: #dbe3fc;
-        border-radius: 8px;
-        padding: 24px 0 40px;
-        margin-bottom: 24px;
-        display: flex;
-        justify-content: center;
-      }
-      .search-box {
-        background-color: #2a6ad1;
-        border-radius: 8px;
-        width: 100%;
-        max-width: 600px;
-        padding: 24px 24px 32px;
-        color: white;
-        box-shadow: 0 0 8px rgb(0 0 0 / 0.1);
-      }
-      .search-box h2 {
-        font-weight: 700;
-        font-size: 20px;
-        margin: 0 0 16px 0;
-        text-align: center;
-      }
-      .search-inputs {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .input-text {
-        flex: 1 1 180px;
-        background-color: white;
-        border-radius: 6px;
-        display: flex;
-        align-items: center;
-        padding: 8px 12px;
-        color: #222;
-        font-size: 14px;
-        font-weight: 600;
-      }
-      .input-text input {
-        border: none;
-        outline: none;
-        font-weight: 600;
-        font-size: 14px;
-        color: #222;
-        flex-grow: 1;
-        background: transparent;
-      }
-      .input-text .icon-plus {
-        color: #2a6ad1;
-        font-size: 14px;
-        cursor: pointer;
-        margin-left: 8px;
-      }
-      .select-box {
-        flex: 1 1 140px;
-        background-color: white;
-        border-radius: 6px;
-        font-weight: 600;
-        font-size: 14px;
-        color: #222;
-        padding: 8px 12px;
-        border: none;
-        outline: none;
-        cursor: pointer;
-      }
-      .date-picker {
-        flex: 1 1 120px;
-        background-color: white;
-        border-radius: 6px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 8px 12px;
-        font-weight: 600;
-        font-size: 12px;
-        color: #222;
-      }
-      .date-picker i {
-        color: #222;
-        font-size: 16px;
-      }
-      .date-picker span {
-        white-space: nowrap;
-      }
-      .btn-search {
-        background-color: #2a6ad1;
-        border-radius: 6px;
-        border: none;
-        color: white;
-        font-weight: 700;
-        font-size: 14px;
-        padding: 8px 16px;
-        cursor: pointer;
-        flex-shrink: 0;
-        margin-left: 8px;
-      }
-      .btn-search:hover {
-        background-color: #1f4db8;
-      }
-
-      .content {
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-      }
-      .filter-box {
-        background-color: white;
-        border-radius: 6px;
-        padding: 12px 16px 16px;
-        width: 160px;
-        font-weight: 700;
-        font-size: 14px;
-        box-shadow: 0 0 8px rgb(0 0 0 / 0.05);
-      }
-      .filter-box label {
-        font-weight: 600;
-        font-size: 12px;
-        margin-bottom: 4px;
-        display: block;
-      }
-      .filter-price {
-        font-weight: 400;
-        font-size: 12px;
-        margin: 4px 0 12px;
-        color: #666;
-      }
-      .filter-price input[type="range"] {
-        width: 100%;
-      }
-      .filter-price-values {
-        display: flex;
-        justify-content: space-between;
-        font-size: 10px;
-        color: #999;
-        margin-top: 4px;
-      }
-      .filter-box .btn-filter-search {
-        background-color: #2a6ad1;
-        border-radius: 6px;
-        border: none;
-        color: white;
-        font-weight: 700;
-        font-size: 12px;
-        padding: 8px 12px;
-        cursor: pointer;
-        width: 100%;
-      }
-      .filter-box .btn-filter-search:hover {
-        background-color: #1f4db8;
-      }
-
-      .listings {
-        flex: 1 1 0;
-        min-width: 0;
-      }
-      .listings-header {
-        font-weight: 700;
-        font-size: 14px;
-        margin-bottom: 12px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .listings-header .sort-select {
-        font-weight: 600;
-        font-size: 12px;
-        padding: 4px 8px;
-        border-radius: 20px;
-        border: 1px solid #ccc;
-        cursor: pointer;
-      }
-
-      .listing-item {
-        background-color: white;
-        border-radius: 6px;
-        box-shadow: 0 0 8px rgb(0 0 0 / 0.05);
-        margin-bottom: 16px;
-        display: flex;
-        gap: 12px;
-        padding: 12px 16px;
-      }
-      .listing-item img {
-        width: 120px;
-        height: 90px;
-        border-radius: 6px;
-        object-fit: cover;
-        flex-shrink: 0;
-      }
-      .listing-info {
-        flex: 1 1 auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-      .listing-title {
-        font-weight: 700;
-        font-size: 14px;
-        color: #2a6ad1;
-        margin: 0 0 4px 0;
-      }
-      .listing-location {
-        font-weight: 600;
-        font-size: 12px;
-        color: #2a6ad1;
-        margin: 0 0 4px 0;
-      }
-      .listing-location + span {
-        font-weight: 400;
-        font-size: 12px;
-        color: #666;
-      }
-      .stars {
-        color: #f5b301;
-        font-size: 12px;
-        margin: 4px 0 4px 0;
-      }
-      .reviews {
-        font-weight: 600;
-        font-size: 10px;
-        color: #666;
-        margin-left: 4px;
-      }
-      .room-info {
-        font-weight: 600;
-        font-size: 12px;
-        margin: 4px 0 0 0;
-        color: #222;
-      }
-      .room-info div {
-        margin-top: 2px;
-      }
-      .free-cancel {
-        font-weight: 600;
-        font-size: 10px;
-        color: #3ca14a;
-        margin-top: 4px;
-      }
-
-      .price-section {
-        flex-shrink: 0;
-        text-align: right;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-      .price {
-        font-weight: 700;
-        font-size: 14px;
-        color: #222;
-      }
-      .price-sub {
-        font-weight: 400;
-        font-size: 10px;
-        color: #999;
-        margin-top: 2px;
-      }
-      .btn-details {
-        background-color: #2a6ad1;
-        border-radius: 6px;
-        border: none;
-        color: white;
-        font-weight: 700;
-        font-size: 12px;
-        padding: 8px 16px;
-        cursor: pointer;
-        margin-top: 8px;
-        align-self: flex-start;
-      }
-      .btn-details:hover {
-        background-color: #1f4db8;
-      }
-
-      .pagination {
-        text-align: center;
-        margin-top: 12px;
-        margin-bottom: 40px;
-      }
-      .pagination button {
-        background: none;
-        border: none;
-        font-weight: 600;
-        font-size: 14px;
-        color: #2a6ad1;
-        cursor: pointer;
-        margin: 0 6px;
-        padding: 4px 8px;
-        border-radius: 50%;
-      }
-      .pagination button.active {
-        background-color: #2a6ad1;
-        color: white;
-      }
-      .pagination button:focus {
-        outline: none;
-      }
-
-      footer {
-        background-color: #2a6ad1;
-        color: white;
-        padding: 20px 12px;
-        font-size: 12px;
-      }
-      footer .footer-container {
-        max-width: 960px;
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 24px;
-        justify-content: space-between;
-      }
-      footer .footer-section {
-        flex: 1 1 200px;
-        min-width: 160px;
-      }
-      footer .footer-section h3 {
-        font-weight: 700;
-        font-size: 14px;
-        margin-bottom: 12px;
-      }
-      footer .footer-section p,
-      footer .footer-section a {
-        font-weight: 400;
-        font-size: 12px;
-        color: white;
-        margin: 4px 0;
-        display: block;
-      }
-      footer .footer-section a:hover {
-        text-decoration: underline;
-      }
-      footer .social-icons {
-        display: flex;
-        gap: 12px;
-        margin-top: 8px;
-      }
-      footer .social-icons a {
-        color: white;
-        font-size: 18px;
-      }
-      footer .social-icons a:hover {
-        color: #a3c0f9;
-      }
-
-      @media (max-width: 768px) {
-        .content {
-          flex-direction: column;
-        }
-        .filter-box {
-          width: 100%;
-          max-width: 320px;
-          margin: 0 auto 24px;
-        }
-        .listings {
-          width: 100%;
-        }
-        .listing-item {
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-        .listing-item img {
-          width: 100%;
-          max-width: 320px;
-          height: 180px;
-          border-radius: 6px;
-        }
-        .listing-info {
-          align-items: center;
-        }
-        .price-section {
-          text-align: center;
-          margin-top: 12px;
-          align-items: center;
-        }
-        .search-box {
-          padding: 20px 16px 28px;
-        }
-        .search-inputs {
-          flex-direction: column;
-          gap: 12px;
-        }
-        .input-text,
-        .select-box,
-        .date-picker {
-          flex: 1 1 100%;
-        }
-        .btn-search {
-          margin-left: 0;
-          width: 100%;
-          margin-top: 8px;
-        }
-        footer .footer-container {
-          flex-direction: column;
-          gap: 16px;
-        }
+      /* Ẩn spinner trên Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield;
       }
     </style>
+    <script src="./js/layout.js"></script>
   </head>
   <body>
-    <header class="header" role="banner">
-      <div aria-label="BookingRooms logo" class="logo">BookingRooms</div>
-      <div aria-label="User profile and name" class="user">
-        <i aria-hidden="true" class="fas fa-user-circle"> </i>
-        <div class="name" title="Nguyễn Văn...">Nguyễn Văn...</div>
-      </div>
-    </header>
-    <main>
-      <section aria-labelledby="search-title" class="search-section">
-        <form
-          aria-describedby="search-desc"
-          class="search-box"
-          onsubmit="return false;"
-          role="search"
-        >
-          <h2 id="search-title">Bạn muốn đi đâu ?</h2>
-          <div class="sr-only" id="search-desc">
-            Form tìm kiếm phòng khách sạn
-          </div>
+    <!-- Phần container cho header -->
+    <div id="header-container"></div>
 
-          <div class="search-inputs">
-            <div
-              aria-label="Bạn muốn đến đâu"
-              class="input-text"
-              role="textbox"
-            >
+    <!-- phần container cho content -->
+    <main class="p-5">
+      <!-- Tìm kiếm -->
+      <section
+        class="bg-secondary 2xl:max-w-4xl md:max-w-xl mx-auto my-5 md:h-60 2xl:h-80 flex justify-center items-center rounded-lg"
+      >
+        <div
+          class="bg-primary rounded-lg p-3 text-center md:h-50 md:max-w-xl 2xl:max-w-3xl 2xl:h-70 mx-auto"
+        >
+          <h3 class="text-white md:text-3xl font-bold mb-3">
+            Bạn muốn đi đâu ?
+          </h3>
+          <div
+            class="bg-white flex flex-col md:h-30 2xl:h-50 gap-5 justify-center items-center px-3 rounded-lg"
+          >
+            <div class="flex flex-row gap-5">
               <input
-                aria-label="Bạn muốn đến đâu"
-                placeholder="Bạn muốn đến đâu"
                 type="text"
+                id="searchLocation"
+                placeholder="Bạn muốn đi đâu ?..."
+                class="bg-[#F2F6F9] md:w-3xs 2xl:w-md md:h-[40px] 2xl:h-[60px] rounded-lg px-5 font-openSans font-semibold 2xl:text-xl"
               />
-              <i
-                aria-hidden="true"
-                class="fas fa-plus icon-plus"
-                role="button"
-                tabindex="0"
-                title="Thêm điểm đến"
+              <!-- số lượng người -->
+              <div class="flex flex-row gap-2 bg-[#F2F6F9] rounded-lg pl-3">
+                <label
+                  class="flex items-center justify-center font-bold font-openSans text-lg 2xl:text-xl"
+                >
+                  Người
+                </label>
+                <div
+                  class="flex flex-row items-center gap-1 justify-center border-1 rounded-sm border-black"
+                >
+                  <!-- btn giảm -->
+                  <button
+                    onclick="handleDecrement()"
+                    class="md:w-[30px] md:h-[20px] 2xl:h-[60px] 2xl:w-[40px] cursor-pointer"
+                  >
+                    <i class="fa-solid fa-minus"></i>
+                  </button>
+                  <input
+                    readonly
+                    id="inputQtyPerson"
+                    value="1"
+                    type="number"
+                    placeholder="1"
+                    min="0"
+                    class="md:w-[30px] md:h-[40px] px-1 font-openSans font-semibold text-black focus:outline-none"
+                  />
+                  <!-- btn tăng -->
+                  <button
+                    onclick="handleIncrement()"
+                    class="md:w-[30px] md:h-[20px] 2xl:w-[40px] cursor-pointer"
+                  >
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-row gap-5">
+              <input
+                id="InputcheckIn"
+                onchange="validateCheckIn()"
+                type="date"
+                class="bg-[#F2F6F9] md:w-[150px] md:h-[40px] 2xl:h-[60px] 2xl:w-[230px] rounded-lg px-3 2xl:text-xl font-openSans font-semibold"
+              />
+              <input
+                onchange="validateDateRange()"
+                id="InputcheckOut"
+                type="date"
+                class="bg-[#F2F6F9] md:w-[150px] md:h-[40px] 2xl:h-[60px] 2xl:w-[230px] 2xl:text-xl rounded-lg px-3 font-openSans font-semibold"
+              />
+              <button
+                onclick="handleSubmit()"
+                id="btnSearch"
+                class="bg-primary md:w-[120px] md:h-[40px] 2xl:h-[60px] 2xl:w-[170px] rounded-lg font-bold font-openSans text-xl text-white 2xl:text-2xl cursor-pointer hover:bg-primary/90"
               >
-              </i>
+                Tìm kiếm
+              </button>
             </div>
-            <select aria-label="Số lượng người lớn" class="select-box">
-              <option>1 người lớn</option>
-              <option>2 người lớn</option>
-              <option>3 người lớn</option>
-              <option>4 người lớn</option>
-            </select>
-            <div aria-label="Ngày nhận phòng" class="date-picker">
-              <i aria-hidden="true" class="fas fa-calendar-alt"> </i>
-              <span> 2 , tháng 6 </span>
-            </div>
-            <div aria-label="Ngày trả phòng" class="date-picker">
-              <i aria-hidden="true" class="fas fa-calendar-alt"> </i>
-              <span> 3 , tháng 6 </span>
-            </div>
-            <button aria-label="Tìm kiếm" class="btn-search" type="submit">
-              Tìm kiếm
-            </button>
           </div>
-        </form>
+        </div>
       </section>
       <section aria-label="Danh sách phòng và bộ lọc" class="content">
         <aside aria-label="Bộ lọc giá" class="filter-box">
@@ -785,35 +384,10 @@
             <button aria-label="Trang tiếp">&gt;&gt;</button>
           </nav>
         </section>
-      </section>
     </main>
-    <footer role="contentinfo">
-      <div class="footer-container">
-        <section aria-labelledby="footer-bookingrooms" class="footer-section">
-          <h3 id="footer-bookingrooms">BookingRooms</h3>
-          <p>Liên hệ : Group6@gmail.com</p>
-          <p>Điện thoại : xxx xxx xxxx</p>
-        </section>
-        <section aria-labelledby="footer-links" class="footer-section">
-          <h3 id="footer-links">Liên kết</h3>
-          <a href="#"> Về chúng tôi </a>
-          <a href="#"> Điều khoản dịch vụ </a>
-        </section>
-        <section aria-labelledby="footer-follow" class="footer-section">
-          <h3 id="footer-follow">Theo dõi chúng tôi</h3>
-          <div class="social-icons">
-            <a aria-label="Facebook" href="#">
-              <i aria-hidden="true" class="fab fa-facebook-f"> </i>
-            </a>
-            <a aria-label="Instagram" href="#">
-              <i aria-hidden="true" class="fab fa-instagram"> </i>
-            </a>
-            <a aria-label="Twitter" href="#">
-              <i aria-hidden="true" class="fab fa-twitter"> </i>
-            </a>
-          </div>
-        </section>
-      </div>
-    </footer>
+    <!-- Phần container cho footer -->
+    <div id="footer-container"></div>
+    <!-- Chức năng tìm kiếm và validateInput -->
+    <script src="./js/index.js"></script>
   </body>
 </html>
