@@ -26,12 +26,12 @@ function renderUserBox() {
   } else {
     userBox.innerHTML = `<a
       class="bg-white w-[120px] h-[50px] rounded-full font-openSans font-bold text-primary cursor-pointer hover:border-2 hover:border-white hover:bg-blue-500 hover:text-white duration-200 ease-out hover:scale-110 block flex justify-center items-center"
-      href="../login.html">
+      href="login.html">
       Đăng nhập
     </a>
     <a
       class="bg-white w-[120px] h-[50px] rounded-full font-openSans font-bold text-primary cursor-pointer hover:border-2 hover:border-white hover:bg-blue-500 hover:text-white duration-200 ease-out hover:scale-110 block flex justify-center items-center"
-      href="../register.html">
+      href="register.html">
       Đăng ký
     </a>`;
   }
