@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./imgs/logo.svg" type="image/image/svg+xml" />
+    <title>BookingRooms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-primary: #2464ec;
+        --color-secondary: #e1e7ff;
+
+        --font-poppins: "Poppins", "sans-serif";
+        --font-openSans: "Open Sans", "sans-serif";
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Ẩn spinner trên Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+    </style>
+    <!-- Dùng để load component header và footer -->
+    <script src="./js/layout.js"></script>
+  </head>
+  <body class="bg-[#F0F3F8]">
+    <!-- Loading indicator -->
+    <div id="page-loader" class="page-loader">
+      <span class="loader"></span>
+    </div>
+
+    <!-- Phần container cho header -->
+    <div id="header-container"></div>
+
+    <!-- phần container cho content -->
+    <main class="min-h-lvh p-5 max-w-6xl mx-auto">
+      <section class="flex w-full justify-center flex-col md:flex-row gap-5">
+        <div class="flex-3 flex flex-col">
+          <h4 id="name" class="font-poppins font-bold text-xl">Đang tải...</h4>
+          <a id="position" class="font-openSans font-medium">Đang tải...</a>
+          <div id="image-container" class="flex flex-wrap gap-1 mt-4"></div>
+          <div
+            id="image-modal"
+            class="fixed inset-0 bg-black/80 items-center justify-center z-50 hidden"
+          >
+            <!-- Toolbar trên cùng -->
+            <div
+              class="absolute top-0 left-0 right-0 h-16 flex items-center justify-between px-4"
+            >
+              <div class="text-white">
+                <span id="image-counter" class="font-medium">1/10</span>
+              </div>
+              <button
+                id="close-modal"
+                class="rounded-full p-2 text-white text-3xl font-bold hover:bg-white hover:bg-opacity-20"
+              >
+                ✕
+              </button>
+            </div>
+
+            <button
+              id="prev-btn"
+              class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-5xl px-3 py-1 rounded-full nav-btn z-40"
+            >
+              ‹
+            </button>
+            <button
+              id="next-btn"
+              class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-5xl px-3 py-1 rounded-full nav-btn z-40"
+            >
+              ›
+            </button>
+
+            <div class="modal-img-container">
+              <img
+                id="modal-img"
+                src=""
+                class="max-h-[85vh] max-w-[90vw] shadow-xl"
+              />
+            </div>
+
+            <!-- Thumbnails ở dưới -->
+            <div
+              class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent"
+            >
+              <div
+                id="thumbnails-container"
+                class="flex overflow-x-auto px-4 py-2 gap-2 h-full items-center"
+              >
+                <!-- Thumbnails sẽ được thêm ở đây -->
+              </div>
+            </div>
+          </div>
+          <div
+            id="description"
+            class="mt-10 font-openSans max-w-3xl flex flex-col gap-2 text-neutral-500"
+          ></div>
+        </div>
+        <div class="flex-1 flex gap-5 flex-col">
+          <!-- Room price info card -->
+          <div class="bg-white shadow-md p-5 rounded-lg">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="font-poppins font-bold text-xl">Giá từ</h3>
+              <div id="room-price" class="text-2xl font-bold text-primary">
+                2.500.000 ₫
+              </div>
+            </div>
+            <div class="text-sm text-gray-500 mb-4">
+              Giá mỗi đêm, chưa bao gồm thuế
+            </div>
+            <div class="flex gap-5">
+              <button
+                class="text-white bg-primary w-[35px] h-[35px] flex justify-center items-center text-lg rounded-full cursor-pointer hover:bg-blue-700 transition"
+              >
+                <i class="fa-regular fa-heart"></i>
+              </button>
+              <button
+                class="text-white bg-primary w-[35px] h-[35px] flex justify-center items-center text-lg rounded-full cursor-pointer hover:bg-blue-700 transition"
+              >
+                <i class="fa-solid fa-share-nodes"></i>
+              </button>
+              <button
+                class="bg-primary text-white text-xl px-5 py-2 font-medium rounded-lg hover:bg-blue-700 transition cursor-pointer flex-grow"
+              >
+                Đặt ngay
+              </button>
+            </div>
+          </div>
+          <div
+            class="border-1 bg-white shadow-md flex justify-evenly py-5 rounded-lg"
+          >
+            <div>
+              <p class="font-openSans font-bold text-2xl">Tuyệt vời</p>
+              <span>1909 đánh giá</span>
+            </div>
+            <button
+              class="text-2xl font-poppins font-bold bg-primary text-white px-5 py-3 rounded-lg"
+            >
+              9,8
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="flex flex-col gap-10">
+        <div class="flex flex-col gap-5 mt-5">
+          <div class="flex flex-wrap gap-5">
+            <div class="flex items-center gap-2 w-[250px]">
+              <img
+                src="./imgs/wifi-signal.png"
+                alt="wifi miễn phí"
+                class="w-[50px] h-[50px]"
+              />
+              <p>wifi miễn phí</p>
+            </div>
+            <div class="flex items-center gap-2 w-[250px]">
+              <img
+                src="./imgs/car-wash.png"
+                alt="Xe  đưa đón"
+                class="w-[50px] h-[50px]"
+              />
+              <p>Xe đưa đón</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-5">
+            <div class="flex items-center gap-2 w-[250px]">
+              <img
+                src="./imgs/restaurant.png"
+                alt="Nhà hàng"
+                class="w-[50px] h-[50px]"
+              />
+              <p>Nhà hàng</p>
+            </div>
+            <div class="flex items-center gap-2 w-[250px]">
+              <img
+                src="./imgs/receptionist.png"
+                alt="Dịch vụ lễ tân"
+                class="w-[50px] h-[50px]"
+              />
+              <p>Dịch vụ lễ tân 24/24</p>
+            </div>
+          </div>
+        </div>
+        <div class="">
+          <table class="w-full">
+            <thead
+              class="border-2 text-2xl font-openSans font-bold h-[50px] bg-primary text-white"
+            >
+              <tr>
+                <th>Loại phòng</th>
+                <th>Số người</th>
+                <th>Đặt</th>
+              </tr>
+            </thead>
+            <tbody class="border-1 border-cyan-500">
+              <tr class="border-r-1 border-cyan-500">
+                <td
+                  class="flex items-center p-4 gap-5 border-r-1 border-cyan-500"
+                >
+                  <i class="fa-solid fa-caret-right text-4xl text-cyan-500"></i>
+                  <div>
+                    <h6 class="text-black font-bold font-openSans text-lg">
+                      Phòng VIP 1
+                    </h6>
+                    <p class="text-neutral-400">1 giường đơn</p>
+                  </div>
+                </td>
+                <td class="border-r-1 border-cyan-500">
+                  <p
+                    class="text-black text-2xl text-center font-openSans font-bold"
+                  >
+                    2 <i class="fa-solid fa-user text-cyan-600"></i>
+                  </p>
+                </td>
+                <td>
+                  <div class="flex justify-center">
+                    <button
+                      class="px-5 py-3 bg-primary font-openSans font-bold text-md text-white rounded-xs"
+                    >
+                      Đặt phòng
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="flex items-center p-4 gap-5 border-r-1 border-cyan-500"
+                >
+                  <i class="fa-solid fa-caret-right text-4xl text-cyan-500"></i>
+                  <div>
+                    <h6 class="text-black font-bold font-openSans text-lg">
+                      Phòng VIP 1
+                    </h6>
+                    <p class="text-neutral-400">3 giường đơn</p>
+                  </div>
+                </td>
+                <td class="border-r-1 border-cyan-500">
+                  <p
+                    class="text-black text-2xl text-center font-openSans font-bold"
+                  >
+                    3 <i class="fa-solid fa-user text-cyan-600"></i>
+                  </p>
+                </td>
+                <td>
+                  <div class="flex justify-center">
+                    <button
+                      class="px-5 py-3 bg-primary font-openSans font-bold text-md text-white rounded-xs"
+                    >
+                      Đặt phòng
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="flex items-center p-4 gap-5 border-r-1 border-cyan-500"
+                >
+                  <i class="fa-solid fa-caret-right text-4xl text-cyan-500"></i>
+                  <div>
+                    <h6 class="text-black font-bold font-openSans text-lg">
+                      Phòng VIP 3
+                    </h6>
+                    <p class="text-neutral-400">2 giường đôi</p>
+                  </div>
+                </td>
+                <td class="border-r-1 border-cyan-500">
+                  <p
+                    class="text-black text-2xl text-center font-openSans font-bold"
+                  >
+                    4 <i class="fa-solid fa-user text-cyan-600"></i>
+                  </p>
+                </td>
+                <td>
+                  <div class="flex justify-center">
+                    <button
+                      class="px-5 py-3 bg-primary font-openSans font-bold text-md text-white rounded-xs"
+                    >
+                      Đặt phòng
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h3 class="font-poppins font-bold text-xl mb-4">
+            Đánh giá của khách hàng
+          </h3>
+          <div class="flex">
+            <textarea
+              class="resize-none border border-gray-300 p-2 rounded-l-sm w-full h-20"
+              placeholder="Nhập đánh giá của bạn tại đây..."
+            ></textarea>
+            <button
+              class="bg-primary text-white font-openSans font-bold py-2 rounded-r-sm px-8 cursor-pointer hover:bg-blue-700 transition"
+            >
+              Gửi
+            </button>
+          </div>
+          <div class="flex flex-wrap gap-4 mt-10" id="reviews-container">
+            <article
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:max-w-sm duration-250 ease-in-out transition-all p-6 max-w-xs flex flex-col gap-4 border-l-4 border-primary"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-400 flex justify-center items-center flex-shrink-0 shadow-md"
+                >
+                  <p class="font-bold text-xl text-white">N</p>
+                </div>
+                <div class="flex flex-col">
+                  <h4 class="text-lg font-openSans font-bold text-gray-800">
+                    Nguyễn Toàn Chung
+                  </h4>
+                  <div class="flex items-center gap-2 mt-1">
+                    <img
+                      src="./imgs/vietnam.webp"
+                      class="w-5 h-3.5 rounded-sm shadow-sm"
+                      alt="Vietnam"
+                    />
+                    <span class="text-xs text-gray-500">2 ngày trước</span>
+                  </div>
+                  <div class="flex text-yellow-400 mt-1">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                    <span class="text-xs text-gray-500 ml-2">4.5</span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="text-gray-600 italic border-l-2 border-gray-200 pl-3 py-1"
+              >
+                <p>
+                  "Nội thất đẹp, hiện đại và được dọn dẹp kỹ lưỡng mỗi ngày."
+                </p>
+              </div>
+
+              <div class="flex justify-between items-center mt-2 text-sm">
+                <div class="flex items-center gap-3 text-gray-500">
+                  <button
+                    class="flex items-center gap-1 hover:text-primary transition-colors"
+                  >
+                    <i class="fa-regular fa-thumbs-up"></i>
+                    <span>12</span>
+                  </button>
+                  <button class="hover:text-primary transition-colors">
+                    <i class="fa-regular fa-comment"></i>
+                    <span>Phản hồi</span>
+                  </button>
+                </div>
+                <div class="text-xs text-gray-400">Đã ở: Phòng VIP 1</div>
+              </div>
+            </article>
+            <article
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:max-w-sm duration-250 ease-in-out transition-all p-6 max-w-xs flex flex-col gap-4 border-l-4 border-primary"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-400 flex justify-center items-center flex-shrink-0 shadow-md"
+                >
+                  <p class="font-bold text-xl text-white">N</p>
+                </div>
+                <div class="flex flex-col">
+                  <h4 class="text-lg font-openSans font-bold text-gray-800">
+                    Nguyễn Toàn Chung
+                  </h4>
+                  <div class="flex items-center gap-2 mt-1">
+                    <img
+                      src="./imgs/vietnam.webp"
+                      class="w-5 h-3.5 rounded-sm shadow-sm"
+                      alt="Vietnam"
+                    />
+                    <span class="text-xs text-gray-500">2 ngày trước</span>
+                  </div>
+                  <div class="flex text-yellow-400 mt-1">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                    <span class="text-xs text-gray-500 ml-2">4.5</span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="text-gray-600 italic border-l-2 border-gray-200 pl-3 py-1"
+              >
+                <p>
+                  "Nội thất đẹp, hiện đại và được dọn dẹp kỹ lưỡng mỗi ngày."
+                </p>
+              </div>
+
+              <div class="flex justify-between items-center mt-2 text-sm">
+                <div class="flex items-center gap-3 text-gray-500">
+                  <button
+                    class="flex items-center gap-1 hover:text-primary transition-colors"
+                  >
+                    <i class="fa-regular fa-thumbs-up"></i>
+                    <span>12</span>
+                  </button>
+                  <button class="hover:text-primary transition-colors">
+                    <i class="fa-regular fa-comment"></i>
+                    <span>Phản hồi</span>
+                  </button>
+                </div>
+                <div class="text-xs text-gray-400">Đã ở: Phòng VIP 1</div>
+              </div>
+            </article>
+            <article
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:max-w-sm duration-250 ease-in-out transition-all p-6 max-w-xs flex flex-col gap-4 border-l-4 border-primary"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-400 flex justify-center items-center flex-shrink-0 shadow-md"
+                >
+                  <p class="font-bold text-xl text-white">N</p>
+                </div>
+                <div class="flex flex-col">
+                  <h4 class="text-lg font-openSans font-bold text-gray-800">
+                    Nguyễn Toàn Chung
+                  </h4>
+                  <div class="flex items-center gap-2 mt-1">
+                    <img
+                      src="./imgs/vietnam.webp"
+                      class="w-5 h-3.5 rounded-sm shadow-sm"
+                      alt="Vietnam"
+                    />
+                    <span class="text-xs text-gray-500">2 ngày trước</span>
+                  </div>
+                  <div class="flex text-yellow-400 mt-1">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                    <span class="text-xs text-gray-500 ml-2">4.5</span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="text-gray-600 italic border-l-2 border-gray-200 pl-3 py-1"
+              >
+                <p>
+                  "Nội thất đẹp, hiện đại và được dọn dẹp kỹ lưỡng mỗi ngày."
+                </p>
+              </div>
+
+              <div class="flex justify-between items-center mt-2 text-sm">
+                <div class="flex items-center gap-3 text-gray-500">
+                  <button
+                    class="flex items-center gap-1 hover:text-primary transition-colors"
+                  >
+                    <i class="fa-regular fa-thumbs-up"></i>
+                    <span>12</span>
+                  </button>
+                  <button class="hover:text-primary transition-colors">
+                    <i class="fa-regular fa-comment"></i>
+                    <span>Phản hồi</span>
+                  </button>
+                </div>
+                <div class="text-xs text-gray-400">Đã ở: Phòng VIP 1</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Phần container cho footer -->
+    <div id="footer-container"></div>
+    <script src="./js/detail.js"></script>
+  </body>
+</html>

@@ -15,8 +15,6 @@ input[type="password"] {
   -webkit-text-security: disc !important;
 }
 
-
-
 /* Áp dụng cụ thể cho trường password của bạn */
 /* tat an hien password */
 #password::-ms-reveal,
@@ -43,4 +41,71 @@ input[type="radio"]:checked + .radio-circle {
 }
 input[type="radio"]:checked + .radio-circle .radio-dot {
   transform: scale(1);
+}
+
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid var(--color-primary);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Image gallery */
+.img-hover {
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.img-hover.loaded {
+  opacity: 1;
+}
+
+.nav-btn {
+  opacity: 0.7;
+  transition: opacity 0.3s, background-color 0.3s;
+}
+
+.nav-btn:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.price-badge {
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.price-badge:hover {
+  transform: scale(1.05);
 }

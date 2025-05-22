@@ -20,15 +20,25 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
+    
       @theme {
         --color-primary: #2464ec;
         --color-secondary: #f0f3f8;
 
         --font-poppins: "Poppins", "sans-serif";
         --font-openSans: "Open Sans", "sans-serif";
-      }
 
-      /* CSS để ẩn biểu tượng con mắt trong trường input password */
+        --animate-progress: progress 2s linear forwards;
+
+        @keyframes progress {
+          0% {
+            width: 100%;
+          }
+          100% {
+            width: 0%;
+          }
+        }
+      }
     </style>
     <!-- Dùng để load component header và footer -->
     <link rel="stylesheet" href="./css/style.css" />
@@ -101,13 +111,13 @@
             <div class="inline-flex items-center">
               <label
                 class="flex items-center cursor-pointer relative"
-                for="check-2"
+                for="rememberLogin"
               >
                 <input
                   type="checkbox"
                   checked
                   class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border-2 border-primary checked:bg-blue-800 checked:border-blue-800"
-                  id="check-2"
+                  id="rememberLogin"
                 />
                 <span
                   class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
@@ -130,7 +140,7 @@
               </label>
               <label
                 class="cursor-pointer ml-2 text-sm font-semibold text-black"
-                for="check-2"
+                for="rememberLogin"
               >
                 Ghi nhớ đăng nhập
               </label>
@@ -161,6 +171,7 @@
     <div id="footer-container"></div>
 
     <!-- Chức năng tìm kiếm và validateInput -->
-    <script src="./js/login.js"></script> 
+    <script type="module" src="./js/ToastNotification.js"></script>
+    <script src="./js/login.js"></script>
   </body>
 </html>

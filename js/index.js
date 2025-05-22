@@ -1,4 +1,10 @@
-// index.js
+const initToast = async () => {
+  const toastModule = await import("./ToastNotification.js");
+  toast = toastModule.toast;
+  return toast;
+};
+
+initToast();
 const inputQtyPerson = document.getElementById("inputQtyPerson");
 
 // Giảm số lượng người
@@ -33,6 +39,7 @@ window.addEventListener("DOMContentLoaded", () => {
 const validateDateRange = () => {
   if (!inputcheckIn.value || !inputcheckOut.value) {
     // Không kiểm tra nếu chưa chọn đủ 2 ngày
+    toast.error("Chưa chọn ngày check out");
     return;
   }
 
@@ -41,7 +48,7 @@ const validateDateRange = () => {
 
   if (checkIn > checkOut) {
     inputcheckOut.value = "";
-    alert("Ngày check out phải trễ hơn check int");
+    toast.error("Ngày check out phải trễ hơn check int");
   }
 };
 
@@ -50,7 +57,7 @@ const validateCheckIn = () => {
   const formattedToday = new Date().toISOString().split("T")[0];
   if (checkIn < formattedToday) {
     inputcheckIn.value = "";
-    alert("Bạn đang chọn ngày trong quá khứ ");
+    toast.error("Bạn đang chọn ngày trong quá khứ ");
   }
 };
 
@@ -59,13 +66,21 @@ const btnSearch = document.getElementById("btnSearch");
 const handleSubmit = () => {
   let searchLocation = document.getElementById("searchLocation");
   if (searchLocation.value.trim() === "") {
+    toast.error("Mời nhập nơi đến");
     return;
   }
   if (!inputcheckIn.value || !inputcheckOut.value) {
+    toast.error("Chưa chọn ngày checkOut");
+
     return;
   }
-  if (inputQtyPerson <= 0) {
+  if (inputQtyPerson.value <= 0) {
     return;
   }
-  console.log(searchLocation.value);
+
+  window.location.href = `search.html?searchLocation=${
+    searchLocation.value
+  }&personQty=${inputQtyPerson.value}&checkIn=${inputcheckIn.value}&checkOut=${
+    inputcheckOut.value
+  }&page=${1}`;
 };
