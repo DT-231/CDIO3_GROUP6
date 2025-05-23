@@ -22,7 +22,13 @@ function renderUserBox() {
     </a>
     <span class="bg-white w-[200px] h-[50px] rounded-full font-openSans font-bold text-primary cursor-pointer hover:border-2 hover:border-white hover:bg-blue-500 hover:text-white duration-200 ease-out hover:scale-110 px-3 leading-[50px] truncate text-center">
       ${account.lastName} ${account.firstName}
-    </span>`;
+    </span>
+    <button class="bg-white  rounded-full font-openSans font-bold text-primary cursor-pointer hover:border-2 hover:border-white hover:bg-blue-500 hover:text-white duration-200  px-3 leading-[50px] truncate text-center"
+    onClick="handlelogOut()"
+    >
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </button>
+    `;
   } else {
     userBox.innerHTML = `<a
       class="bg-white w-[120px] h-[50px] rounded-full font-openSans font-bold text-primary cursor-pointer hover:border-2 hover:border-white hover:bg-blue-500 hover:text-white duration-200 ease-out hover:scale-110 block flex justify-center items-center"
@@ -55,3 +61,13 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch((error) => console.error("Không thể tải footer:", error));
 });
+
+const handlelogOut = () => {
+  const user = localStorage.getItem("user");
+  if (user) {
+    localStorage.removeItem("user");
+    setTimeout(() => {
+      location.reload();
+    }, 300);
+  }
+};

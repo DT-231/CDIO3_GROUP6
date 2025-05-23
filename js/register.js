@@ -4,8 +4,8 @@ const initToast = async () => {
   return toast;
 };
 
-// Call this to initialize toast
 initToast();
+
 const email = document.getElementById("email"); // radio email
 const spanRadioEmail = document.getElementById("spanRadioEmail");
 
@@ -166,8 +166,7 @@ const checkRePasswordLikePassword = () => {
   const valueRePassword = rePassword.value;
 
   if (valueRePassword !== valuePassword) {
-    rePassword.classList.add("outline-red-500", "outline-3");
-    errorMesageRePassword.textContent = "Chưa khớp với mật khẩu";
+    errorMesageRePassword.textContent = `Chưa giống với mật khẩu `;
     return false;
   }
   return true;
@@ -203,26 +202,38 @@ const postData = async (body) => {
     // Lỗi server hoặc validate, ném lỗi ra ngoài
     const error = await response.text();
     throw new Error(error);
+    return null;
   }
 
   const data = await response.json();
   return data;
 };
 
-const validatePassword = () => {
-  let value = password.value;
+const validatePassword = (inputElement, text) => {
+  let value = inputElement.value;
+  if (value.trim() == "") {
+    toast.error(`${text} không được để trống`);
+    return false;
+  }
+
   if (value.length < 8) {
-    toast.error("Mật khẩu ít nhất phải có 8 chữ số");
+    toast.error(`${text} ít nhất phải có 8 chữ số`);
     return false;
   }
-  if (isNaN(Number(value))) {
-    toast.error("Mật khẩu phải có ít nhất 1 chữ cái");
+  if (!/[a-zA-Z]/.test(value)) {
+    toast.error(`${text} phải có ít nhất 1 chữ cái`);
     return false;
   }
-  if (!/^[a-zA-Z0-9 ]+$/.test(value)) {
-    toast.error("Mật khẩu phải có ký tự đặc biệt ");
+
+  if (!/[0-9]/.test(value)) {
+    toast.error(`${text} phải có ít nhất 1 chữ số`);
     return false;
   }
+  if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+    toast.error(`${text} phải có ít nhất 1 ký tự đặc biệt`);
+    return false;
+  }
+
   return true;
 };
 
@@ -230,9 +241,8 @@ const handleSubmit = async () => {
   let check =
     firstName.value.trim() !== "" &&
     lastName.value.trim() !== "" &&
-    password.value.trim() !== "" &&
-    rePassword.value.trim() !== "" &&
-    validatePassword();
+    validatePassword(password, "Mật khẩu") &&
+    checkRePasswordLikePassword();
   if (!check) {
     return;
   }
@@ -253,9 +263,11 @@ const handleSubmit = async () => {
 
   // fetch data cho server
   const result = await postData(body);
-  if (+result.code === 0) {
+  console.log(result);
+
+  if (result != null && +result.code === 0) {
     toast.success(result.message);
-    window.location.href = "/login.html";
+    window.location.href = "/login.html"; // tối fix chỗ này
   } else {
     toast.error(result.message);
   }
