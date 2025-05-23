@@ -20,18 +20,31 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
-      
-    </style>
+      @theme {
+        --color-primary: #2464ec;
+        --color-secondary: #e1e7ff;
+        --color-mainBg: #f0f3f8;
+        --font-poppins: "Poppins", "sans-serif";
+        --font-openSans: "Open Sans", "sans-serif";
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
 
+      /* Ẩn spinner trên Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+    </style>
     <link rel="stylesheet" href="./css/style.css" />
     <!-- Dùng để load component header và footer -->
     <script src="./js/layout.js"></script>
-    <script src="./js/register.js" defer></script>
   </head>
   <body>
     <!-- Phần container cho header -->
     <div id="header-container"></div>
-    <button onclick="showToast()">sucess</button>
 
     <!-- phần container cho content -->
     <main class="max-h-screen my-30 flex flex-col justify-center items-center">
@@ -103,7 +116,7 @@
               >Email hoặc số điện thoại</label
             >
             <input
-              class="px-3 bg-secondary text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
+              class="px-3 bg-gray-200 text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
               type="text"
               id="valueRegister"
               placeholder="Nhập Email"
@@ -122,7 +135,7 @@
               >Họ</label
             >
             <input
-              class="px-3 bg-secondary text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
+              class="px-3 bg-gray-200 text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
               type="text"
               id="lastName"
               placeholder="Nhập họ"
@@ -140,7 +153,7 @@
               >Tên</label
             >
             <input
-              class="px-3 bg-secondary text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
+              class="px-3 bg-gray-200 text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
               type="text"
               id="firstName"
               placeholder="Nhập Tên"
@@ -162,7 +175,7 @@
               <input
                 type="password"
                 id="password"
-                class="passwordInput px-3 bg-secondary text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
+                class="passwordInput px-3 bg-gray-200 text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
                 placeholder="Mật khẩu"
               />
               <span
@@ -189,7 +202,7 @@
               <input
                 type="password"
                 id="RePassword"
-                class="passwordInput px-3 bg-secondary text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
+                class="passwordInput px-3 bg-gray-200 text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
                 placeholder="Nhập lại mật khẩu"
               />
               <span
@@ -225,13 +238,12 @@
         </div>
       </section>
     </main>
-    <div id="toastBox" class="fixed top-8 right-4 flex flex-col items-end gap-4 z-50">
-      <!-- Toasts will be added here -->
-    </div>
-    </div>
+
     <!-- Phần container cho footer -->
     <div id="footer-container"></div>
 
     <!-- Chức năng tìm kiếm và validateInput -->
+    <script type="module" src="./js/ToastNotification.js"></script>
+    <script src="./js/register.js"></script>
   </body>
 </html>

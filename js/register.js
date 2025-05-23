@@ -1,5 +1,11 @@
-import { toast } from "./ToastNotification";
+const initToast = async () => {
+  const toastModule = await import("./ToastNotification.js");
+  toast = toastModule.toast;
+  return toast;
+};
 
+// Call this to initialize toast
+initToast();
 const email = document.getElementById("email"); // radio email
 const spanRadioEmail = document.getElementById("spanRadioEmail");
 
