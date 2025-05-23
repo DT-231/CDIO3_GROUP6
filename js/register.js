@@ -73,8 +73,6 @@ const handleValidateValueRegister = () => {
       message = `Sai định dạng Email`;
     }
   }
-  console.log(message);
-
   errorMesageValueRegister.textContent = message;
   return check;
 };
@@ -211,12 +209,30 @@ const postData = async (body) => {
   return data;
 };
 
+const validatePassword = () => {
+  let value = password.value;
+  if (value.length < 8) {
+    toast.error("Mật khẩu ít nhất phải có 8 chữ số");
+    return false;
+  }
+  if (isNaN(Number(value))) {
+    toast.error("Mật khẩu phải có ít nhất 1 chữ cái");
+    return false;
+  }
+  if (!/^[a-zA-Z0-9 ]+$/.test(value)) {
+    toast.error("Mật khẩu phải có ký tự đặc biệt ");
+    return false;
+  }
+  return true;
+};
+
 const handleSubmit = async () => {
   let check =
     firstName.value.trim() !== "" &&
     lastName.value.trim() !== "" &&
     password.value.trim() !== "" &&
-    rePassword.value.trim() !== "";
+    rePassword.value.trim() !== "" &&
+    validatePassword();
   if (!check) {
     return;
   }
