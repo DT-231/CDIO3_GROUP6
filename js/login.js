@@ -189,7 +189,7 @@ const handleSubmit = async () => {
       //fix chỗ này
       console.log(baseUrl);
 
-      window.location.href = baseUrl;
+      window.location.href = "../";
     } else {
       if (!toast) {
         const toastModule = await import("./ToastNotification.js");
