@@ -267,7 +267,10 @@ const handleSubmit = async () => {
 
   if (result != null && +result.code === 0) {
     toast.success(result.message);
-    window.location.href = "/login.html"; // tối fix chỗ này
+    window.location.href =
+      window.location.origin +
+      window.location.pathname.split("/").slice(0, 2).join("/") +
+      "/login.html"; // tối fix chỗ này
   } else {
     toast.error(result.message);
   }

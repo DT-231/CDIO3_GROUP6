@@ -182,7 +182,10 @@ const handleSubmit = async () => {
       }
 
       toast.success(result.message);
-      window.location.href = "/"; //fix chỗ này 
+      window.location.href =
+        window.location.origin +
+        window.location.pathname.split("/").slice(0, 2).join("/") +
+        "/"; //fix chỗ này
     } else {
       if (!toast) {
         const toastModule = await import("./ToastNotification.js");
