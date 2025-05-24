@@ -202,30 +202,44 @@ const postData = async (body) => {
     // Lỗi server hoặc validate, ném lỗi ra ngoài
     const error = await response.text();
     throw new Error(error);
-    return null;
   }
 
   const data = await response.json();
   return data;
 };
 
+const CheckSpaceInput = (inputElement) => {
+  let value = inputElement.value;
+  console.log(value.trim());
+
+  if (value.trim() == "") {
+    return true;
+  }
+  return false;
+};
+
 const validatePassword = (inputElement, text) => {
   let value = inputElement.value;
-  if (value.trim() == "") {
+  if (CheckSpaceInput(inputElement)) {
+    console.log("Khoảng trắng", value);
     toast.error(`${text} không được để trống`);
     return false;
   }
 
   if (value.length < 8) {
+    console.log("độ dài", value);
     toast.error(`${text} ít nhất phải có 8 chữ số`);
     return false;
   }
   if (!/[a-zA-Z]/.test(value)) {
+    console.log("toàn số", value);
+
     toast.error(`${text} phải có ít nhất 1 chữ cái`);
     return false;
   }
 
   if (!/[0-9]/.test(value)) {
+    console.log("toàn chữ", value);
     toast.error(`${text} phải có ít nhất 1 chữ số`);
     return false;
   }
@@ -239,10 +253,12 @@ const validatePassword = (inputElement, text) => {
 
 const handleSubmit = async () => {
   let check =
-    firstName.value.trim() !== "" &&
-    lastName.value.trim() !== "" &&
+    !CheckSpaceInput(firstName) &&
+    !CheckSpaceInput(lastName) &&
     validatePassword(password, "Mật khẩu") &&
     checkRePasswordLikePassword();
+  console.log(check);
+
   if (!check) {
     return;
   }
