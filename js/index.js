@@ -71,7 +71,10 @@ const handleSubmit = () => {
   }
   if (!inputcheckIn.value || !inputcheckOut.value) {
     toast.error("Chưa chọn ngày checkOut");
-
+    return;
+  }
+  if (inputcheckIn.value === inputcheckOut.value) {
+    toast.error("Ngày check out phải lớn hơn ngày check in ");
     return;
   }
   if (inputQtyPerson.value <= 0) {
