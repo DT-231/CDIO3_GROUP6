@@ -51,26 +51,50 @@
     <div id="header-container"></div>
 
     <!-- phần container cho content -->
-    <main class="min-h-lvh p-5 max-w-6xl mx-auto">
-      <section class="flex w-full justify-center flex-col md:flex-row gap-5">
-        <div class="flex-3 flex flex-col">
-          <h4 id="name" class="font-poppins font-bold text-xl">Đang tải...</h4>
-          <a id="position" class="font-openSans font-medium">Đang tải...</a>
-          <div id="image-container" class="flex flex-wrap gap-1 mt-4"></div>
+    <main class="min-h-lvh p-3 sm:p-5 max-w-7xl mx-auto">
+      <!-- Section 1: Room Info and Booking -->
+      <section
+        class="flex w-full justify-center flex-col lg:flex-row gap-4 lg:gap-6"
+      >
+        <!-- Left column - Main content -->
+        <div class="flex-1 lg:flex-[3] flex flex-col">
+          <h4
+            id="name"
+            class="font-poppins font-bold text-lg sm:text-xl md:text-2xl"
+          >
+            Đang tải...
+          </h4>
+          <a
+            id="position"
+            class="font-openSans font-medium text-sm sm:text-base hover:underline"
+            >Đang tải...</a
+          >
+
+          <!-- Image Gallery -->
+          <div
+            id="image-container"
+            class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-2 mt-4"
+          ></div>
+
+          <!-- Image Modal -->
           <div
             id="image-modal"
             class="fixed inset-0 bg-black/80 items-center justify-center z-50 hidden"
           >
             <!-- Toolbar trên cùng -->
             <div
-              class="absolute top-0 left-0 right-0 h-16 flex items-center justify-between px-4"
+              class="absolute top-0 left-0 right-0 h-12 sm:h-16 flex items-center justify-between px-2 sm:px-4"
             >
               <div class="text-white">
-                <span id="image-counter" class="font-medium">1/10</span>
+                <span
+                  id="image-counter"
+                  class="font-medium text-sm sm:text-base"
+                  >1/10</span
+                >
               </div>
               <button
                 id="close-modal"
-                class="rounded-full p-2 text-white text-3xl font-bold hover:bg-white hover:bg-opacity-20"
+                class="rounded-full p-1 sm:p-2 text-white text-xl sm:text-3xl font-bold hover:bg-white hover:bg-opacity-20"
               >
                 ✕
               </button>
@@ -78,13 +102,13 @@
 
             <button
               id="prev-btn"
-              class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-5xl px-3 py-1 rounded-full nav-btn z-40"
+              class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl sm:text-5xl px-2 sm:px-3 py-1 rounded-full nav-btn z-40"
             >
               ‹
             </button>
             <button
               id="next-btn"
-              class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-5xl px-3 py-1 rounded-full nav-btn z-40"
+              class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl sm:text-5xl px-2 sm:px-3 py-1 rounded-full nav-btn z-40"
             >
               ›
             </button>
@@ -93,113 +117,131 @@
               <img
                 id="modal-img"
                 src=""
-                class="max-h-[85vh] max-w-[90vw] shadow-xl"
+                class="max-h-[75vh] sm:max-h-[85vh] max-w-[90vw] shadow-xl"
               />
             </div>
 
             <!-- Thumbnails ở dưới -->
             <div
-              class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent"
+              class="absolute bottom-0 left-0 right-0 h-16 sm:h-20 bg-gradient-to-t from-black to-transparent"
             >
               <div
                 id="thumbnails-container"
-                class="flex overflow-x-auto px-4 py-2 gap-2 h-full items-center"
+                class="flex overflow-x-auto px-2 sm:px-4 py-2 gap-1 sm:gap-2 h-full items-center"
               >
                 <!-- Thumbnails sẽ được thêm ở đây -->
               </div>
             </div>
           </div>
+
+          <!-- Description -->
           <div
             id="description"
-            class="mt-10 font-openSans max-w-3xl flex flex-col gap-2 text-neutral-500"
+            class="mt-6 sm:mt-10 font-openSans max-w-full lg:max-w-3xl flex flex-col gap-2 text-neutral-500 text-sm sm:text-base"
           ></div>
         </div>
-        <div class="flex-1 flex gap-5 flex-col">
+
+        <!-- Right column - Booking info -->
+        <div class="flex-1 lg:flex-[1] flex gap-4 sm:gap-5 flex-col">
           <!-- Room price info card -->
-          <div class="bg-white shadow-md p-5 rounded-lg">
-            <div class="flex justify-between items-center mb-3">
-              <h3 class="font-poppins font-bold text-xl">Giá từ</h3>
-              <div id="room-price" class="text-2xl font-bold text-primary">
+          <div class="bg-white shadow-md p-4 sm:p-5 rounded-lg">
+            <div
+              class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 gap-2"
+            >
+              <h3 class="font-poppins font-bold text-lg sm:text-xl">Giá từ</h3>
+              <div
+                id="room-price"
+                class="text-xl sm:text-2xl font-bold text-primary"
+              >
                 2.500.000 ₫
               </div>
             </div>
-            <div class="text-sm text-gray-500 mb-4">
+            <div class="text-xs sm:text-sm text-gray-500 mb-4">
               Giá mỗi đêm, chưa bao gồm thuế
             </div>
-            <div class="flex gap-5">
+            <div class="flex gap-3 sm:gap-5">
               <button
-                class="text-white bg-primary w-[35px] h-[35px] flex justify-center items-center text-lg rounded-full cursor-pointer hover:bg-blue-700 transition"
+                class="text-white bg-primary w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] flex justify-center items-center text-sm sm:text-lg rounded-full cursor-pointer hover:bg-blue-700 transition"
               >
                 <i class="fa-regular fa-heart"></i>
               </button>
               <button
-                class="text-white bg-primary w-[35px] h-[35px] flex justify-center items-center text-lg rounded-full cursor-pointer hover:bg-blue-700 transition"
+                class="text-white bg-primary w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] flex justify-center items-center text-sm sm:text-lg rounded-full cursor-pointer hover:bg-blue-700 transition"
               >
                 <i class="fa-solid fa-share-nodes"></i>
               </button>
               <button
-                class="bg-primary text-white text-xl px-5 py-2 font-medium rounded-lg hover:bg-blue-700 transition cursor-pointer flex-grow"
+                class="bg-primary text-white text-base sm:text-xl px-4 sm:px-5 py-2 font-medium rounded-lg hover:bg-blue-700 transition cursor-pointer flex-grow"
               >
                 Đặt ngay
               </button>
             </div>
           </div>
+
+          <!-- Rating card -->
           <div
-            class="border-1 bg-white shadow-md flex justify-evenly py-5 rounded-lg"
+            class="border-1 bg-white shadow-md flex justify-evenly py-4 sm:py-5 rounded-lg"
           >
             <div>
-              <p class="font-openSans font-bold text-2xl">Tuyệt vời</p>
-              <span>1909 đánh giá</span>
+              <p class="font-openSans font-bold text-lg sm:text-2xl">
+                Tuyệt vời
+              </p>
+              <span class="text-sm sm:text-base">1909 đánh giá</span>
             </div>
             <button
-              class="text-2xl font-poppins font-bold bg-primary text-white px-5 py-3 rounded-lg"
+              class="text-lg sm:text-2xl font-poppins font-bold bg-primary text-white px-4 sm:px-5 py-2 sm:py-3 rounded-lg"
             >
               9,8
             </button>
           </div>
         </div>
       </section>
-      <section class="flex flex-col gap-10">
-        <div class="flex flex-col gap-5 mt-5">
-          <div class="flex flex-wrap gap-5">
-            <div class="flex items-center gap-2 w-[250px]">
+
+      <!-- Section 2: Amenities and Room Types -->
+      <section class="flex flex-col gap-6 sm:gap-10 mt-6 sm:mt-10">
+        <!-- Amenities -->
+        <div class="flex flex-col gap-4 sm:gap-5">
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5"
+          >
+            <div class="flex items-center gap-2 min-w-0">
               <img
                 src="./imgs/wifi-signal.png"
                 alt="wifi miễn phí"
-                class="w-[50px] h-[50px]"
+                class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex-shrink-0"
               />
-              <p>wifi miễn phí</p>
+              <p class="text-sm sm:text-base">wifi miễn phí</p>
             </div>
-            <div class="flex items-center gap-2 w-[250px]">
+            <div class="flex items-center gap-2 min-w-0">
               <img
                 src="./imgs/car-wash.png"
-                alt="Xe  đưa đón"
-                class="w-[50px] h-[50px]"
+                alt="Xe đưa đón"
+                class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex-shrink-0"
               />
-              <p>Xe đưa đón</p>
+              <p class="text-sm sm:text-base">Xe đưa đón</p>
             </div>
-          </div>
-          <div class="flex flex-wrap gap-5">
-            <div class="flex items-center gap-2 w-[250px]">
+            <div class="flex items-center gap-2 min-w-0">
               <img
                 src="./imgs/restaurant.png"
                 alt="Nhà hàng"
-                class="w-[50px] h-[50px]"
+                class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex-shrink-0"
               />
-              <p>Nhà hàng</p>
+              <p class="text-sm sm:text-base">Nhà hàng</p>
             </div>
-            <div class="flex items-center gap-2 w-[250px]">
+            <div class="flex items-center gap-2 min-w-0">
               <img
                 src="./imgs/receptionist.png"
                 alt="Dịch vụ lễ tân"
-                class="w-[50px] h-[50px]"
+                class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex-shrink-0"
               />
-              <p>Dịch vụ lễ tân 24/24</p>
+              <p class="text-sm sm:text-base">Dịch vụ lễ tân 24/24</p>
             </div>
           </div>
         </div>
-        <div class="">
-          <table class="w-full">
+
+        <!-- Room Types Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[600px]">
             <thead
               class="border-2 text-2xl font-openSans font-bold h-[50px] bg-primary text-white"
             >
@@ -300,49 +342,62 @@
             </tbody>
           </table>
         </div>
+
+        <!-- Reviews Section -->
         <div>
-          <h3 class="font-poppins font-bold text-xl mb-4">
+          <h3 class="font-poppins font-bold text-lg sm:text-xl mb-4">
             Đánh giá của khách hàng
           </h3>
-          <div class="flex">
+
+          <!-- Review Input -->
+          <div class="flex flex-col sm:flex-row gap-2 sm:gap-0">
             <textarea
-              class="resize-none border border-gray-300 p-2 rounded-l-sm w-full h-20"
+              class="resize-none border border-gray-300 p-2 sm:rounded-l-sm sm:rounded-r-none rounded-sm w-full h-16 sm:h-20 text-sm sm:text-base"
               placeholder="Nhập đánh giá của bạn tại đây..."
             ></textarea>
             <button
-              class="bg-primary text-white font-openSans font-bold py-2 rounded-r-sm px-8 cursor-pointer hover:bg-blue-700 transition"
+              class="bg-primary text-white font-openSans font-bold py-2 px-4 sm:px-8 sm:rounded-r-sm sm:rounded-l-none rounded-sm cursor-pointer hover:bg-blue-700 transition text-sm sm:text-base"
             >
               Gửi
             </button>
           </div>
-          <div class="flex flex-wrap gap-4 mt-10" id="reviews-container">
+
+          <!-- Reviews Grid -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6 sm:mt-10"
+            id="reviews-container"
+          >
             <article
-              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:max-w-sm duration-250 ease-in-out transition-all p-6 max-w-xs flex flex-col gap-4 border-l-4 border-primary"
+              class="bg-white rounded-lg shadow-md hover:shadow-lg duration-250 ease-in-out transition-all p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 border-l-4 border-primary"
             >
-              <div class="flex items-start gap-4">
+              <div class="flex items-start gap-3 sm:gap-4">
                 <div
-                  class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-400 flex justify-center items-center flex-shrink-0 shadow-md"
+                  class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary to-blue-400 flex justify-center items-center flex-shrink-0 shadow-md"
                 >
-                  <p class="font-bold text-xl text-white">N</p>
+                  <p class="font-bold text-lg sm:text-xl text-white">N</p>
                 </div>
-                <div class="flex flex-col">
-                  <h4 class="text-lg font-openSans font-bold text-gray-800">
+                <div class="flex flex-col min-w-0">
+                  <h4
+                    class="text-base sm:text-lg font-openSans font-bold text-gray-800 truncate"
+                  >
                     Nguyễn Toàn Chung
                   </h4>
                   <div class="flex items-center gap-2 mt-1">
                     <img
                       src="./imgs/vietnam.webp"
-                      class="w-5 h-3.5 rounded-sm shadow-sm"
+                      class="w-4 h-3 sm:w-5 sm:h-3.5 rounded-sm shadow-sm flex-shrink-0"
                       alt="Vietnam"
                     />
                     <span class="text-xs text-gray-500">2 ngày trước</span>
                   </div>
                   <div class="flex text-yellow-400 mt-1">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star-half-stroke"></i>
+                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+                    <i
+                      class="fa-solid fa-star-half-stroke text-xs sm:text-sm"
+                    ></i>
                     <span class="text-xs text-gray-500 ml-2">4.5</span>
                   </div>
                 </div>
@@ -351,12 +406,14 @@
               <div
                 class="text-gray-600 italic border-l-2 border-gray-200 pl-3 py-1"
               >
-                <p>
+                <p class="text-xs sm:text-sm">
                   "Nội thất đẹp, hiện đại và được dọn dẹp kỹ lưỡng mỗi ngày."
                 </p>
               </div>
 
-              <div class="flex justify-between items-center mt-2 text-sm">
+              <div
+                class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-xs sm:text-sm"
+              >
                 <div class="flex items-center gap-3 text-gray-500">
                   <button
                     class="flex items-center gap-1 hover:text-primary transition-colors"
@@ -372,34 +429,38 @@
                 <div class="text-xs text-gray-400">Đã ở: Phòng VIP 1</div>
               </div>
             </article>
+
+            <!-- Duplicate review cards for demo -->
             <article
-              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:max-w-sm duration-250 ease-in-out transition-all p-6 max-w-xs flex flex-col gap-4 border-l-4 border-primary"
+              class="bg-white rounded-lg shadow-md hover:shadow-lg duration-250 ease-in-out transition-all p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 border-l-4 border-primary"
             >
-              <div class="flex items-start gap-4">
+              <div class="flex items-start gap-3 sm:gap-4">
                 <div
-                  class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-400 flex justify-center items-center flex-shrink-0 shadow-md"
+                  class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary to-blue-400 flex justify-center items-center flex-shrink-0 shadow-md"
                 >
-                  <p class="font-bold text-xl text-white">N</p>
+                  <p class="font-bold text-lg sm:text-xl text-white">T</p>
                 </div>
-                <div class="flex flex-col">
-                  <h4 class="text-lg font-openSans font-bold text-gray-800">
-                    Nguyễn Toàn Chung
+                <div class="flex flex-col min-w-0">
+                  <h4
+                    class="text-base sm:text-lg font-openSans font-bold text-gray-800 truncate"
+                  >
+                    Trần Minh Tuấn
                   </h4>
                   <div class="flex items-center gap-2 mt-1">
                     <img
                       src="./imgs/vietnam.webp"
-                      class="w-5 h-3.5 rounded-sm shadow-sm"
+                      class="w-4 h-3 sm:w-5 sm:h-3.5 rounded-sm shadow-sm flex-shrink-0"
                       alt="Vietnam"
                     />
-                    <span class="text-xs text-gray-500">2 ngày trước</span>
+                    <span class="text-xs text-gray-500">1 tuần trước</span>
                   </div>
                   <div class="flex text-yellow-400 mt-1">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star-half-stroke"></i>
-                    <span class="text-xs text-gray-500 ml-2">4.5</span>
+                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+                    <span class="text-xs text-gray-500 ml-2">5.0</span>
                   </div>
                 </div>
               </div>
@@ -407,55 +468,61 @@
               <div
                 class="text-gray-600 italic border-l-2 border-gray-200 pl-3 py-1"
               >
-                <p>
-                  "Nội thất đẹp, hiện đại và được dọn dẹp kỹ lưỡng mỗi ngày."
+                <p class="text-xs sm:text-sm">
+                  "Dịch vụ tuyệt vời, nhân viên thân thiện và vị trí thuận
+                  tiện."
                 </p>
               </div>
 
-              <div class="flex justify-between items-center mt-2 text-sm">
+              <div
+                class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-xs sm:text-sm"
+              >
                 <div class="flex items-center gap-3 text-gray-500">
                   <button
                     class="flex items-center gap-1 hover:text-primary transition-colors"
                   >
                     <i class="fa-regular fa-thumbs-up"></i>
-                    <span>12</span>
+                    <span>8</span>
                   </button>
                   <button class="hover:text-primary transition-colors">
                     <i class="fa-regular fa-comment"></i>
                     <span>Phản hồi</span>
                   </button>
                 </div>
-                <div class="text-xs text-gray-400">Đã ở: Phòng VIP 1</div>
+                <div class="text-xs text-gray-400">Đã ở: Phòng VIP 2</div>
               </div>
             </article>
+
             <article
-              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:max-w-sm duration-250 ease-in-out transition-all p-6 max-w-xs flex flex-col gap-4 border-l-4 border-primary"
+              class="bg-white rounded-lg shadow-md hover:shadow-lg duration-250 ease-in-out transition-all p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 border-l-4 border-primary"
             >
-              <div class="flex items-start gap-4">
+              <div class="flex items-start gap-3 sm:gap-4">
                 <div
-                  class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-blue-400 flex justify-center items-center flex-shrink-0 shadow-md"
+                  class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary to-blue-400 flex justify-center items-center flex-shrink-0 shadow-md"
                 >
-                  <p class="font-bold text-xl text-white">N</p>
+                  <p class="font-bold text-lg sm:text-xl text-white">L</p>
                 </div>
-                <div class="flex flex-col">
-                  <h4 class="text-lg font-openSans font-bold text-gray-800">
-                    Nguyễn Toàn Chung
+                <div class="flex flex-col min-w-0">
+                  <h4
+                    class="text-base sm:text-lg font-openSans font-bold text-gray-800 truncate"
+                  >
+                    Lê Thị Mai
                   </h4>
                   <div class="flex items-center gap-2 mt-1">
                     <img
                       src="./imgs/vietnam.webp"
-                      class="w-5 h-3.5 rounded-sm shadow-sm"
+                      class="w-4 h-3 sm:w-5 sm:h-3.5 rounded-sm shadow-sm flex-shrink-0"
                       alt="Vietnam"
                     />
-                    <span class="text-xs text-gray-500">2 ngày trước</span>
+                    <span class="text-xs text-gray-500">3 ngày trước</span>
                   </div>
                   <div class="flex text-yellow-400 mt-1">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star-half-stroke"></i>
-                    <span class="text-xs text-gray-500 ml-2">4.5</span>
+                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+                    <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+                    <i class="fa-regular fa-star text-xs sm:text-sm"></i>
+                    <span class="text-xs text-gray-500 ml-2">4.0</span>
                   </div>
                 </div>
               </div>
@@ -463,31 +530,35 @@
               <div
                 class="text-gray-600 italic border-l-2 border-gray-200 pl-3 py-1"
               >
-                <p>
-                  "Nội thất đẹp, hiện đại và được dọn dẹp kỹ lưỡng mỗi ngày."
+                <p class="text-xs sm:text-sm">
+                  "Phòng sạch sẽ, view đẹp nhưng tiếng ồn từ đường phố hơi
+                  nhiều."
                 </p>
               </div>
 
-              <div class="flex justify-between items-center mt-2 text-sm">
+              <div
+                class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-xs sm:text-sm"
+              >
                 <div class="flex items-center gap-3 text-gray-500">
                   <button
                     class="flex items-center gap-1 hover:text-primary transition-colors"
                   >
                     <i class="fa-regular fa-thumbs-up"></i>
-                    <span>12</span>
+                    <span>5</span>
                   </button>
                   <button class="hover:text-primary transition-colors">
                     <i class="fa-regular fa-comment"></i>
                     <span>Phản hồi</span>
                   </button>
                 </div>
-                <div class="text-xs text-gray-400">Đã ở: Phòng VIP 1</div>
+                <div class="text-xs text-gray-400">Đã ở: Phòng VIP 3</div>
               </div>
             </article>
           </div>
         </div>
       </section>
     </main>
+
     <!-- Phần container cho footer -->
     <div id="footer-container"></div>
     <script src="./js/detail.js"></script>

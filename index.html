@@ -26,6 +26,16 @@
 
         --font-poppins: "Poppins", "sans-serif";
         --font-openSans: "Open Sans", "sans-serif";
+        --animate-progress: progress 2s linear forwards;
+
+        @keyframes progress {
+          0% {
+            width: 100%;
+          }
+          100% {
+            width: 0%;
+          }
+        }
       }
       input[type="number"]::-webkit-inner-spin-button,
       input[type="number"]::-webkit-outer-spin-button {
@@ -46,44 +56,54 @@
     <div id="header-container"></div>
 
     <!-- phần container cho content -->
-    <main class="max-h-lvh p-5">
+    <!-- Responsive Main Section for index.html -->
+    <main class="max-w-7xl mx-auto p-3 sm:p-5">
       <!-- Tìm kiếm -->
       <section
-        class="bg-secondary 2xl:max-w-4xl md:max-w-xl mx-auto my-5 md:h-60 2xl:h-80 flex justify-center items-center rounded-lg"
+        class="bg-secondary max-w-full sm:max-w-2xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-4xl mx-auto my-5 min-h-[300px] sm:min-h-[250px] md:min-h-[260px] lg:min-h-[280px] 2xl:min-h-[320px] flex justify-center items-center rounded-lg p-4"
       >
         <div
-          class="bg-primary rounded-lg p-3 text-center md:h-50 md:max-w-xl 2xl:max-w-3xl 2xl:h-70 mx-auto"
+          class="bg-primary rounded-lg p-4 sm:p-6 text-center w-full max-w-full sm:max-w-xl lg:max-w-3xl 2xl:max-w-3xl mx-auto"
         >
-          <h3 class="text-white md:text-3xl font-bold mb-3">
+          <h3
+            class="text-white text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6"
+          >
             Bạn muốn đi đâu ?
           </h3>
+
           <div
-            class="bg-white flex flex-col md:h-30 2xl:h-50 gap-5 justify-center items-center px-3 rounded-lg"
+            class="bg-white flex flex-col gap-4 sm:gap-5 justify-center items-center p-3 sm:p-4 rounded-lg"
           >
-            <div class="flex flex-row gap-5">
+            <!-- Row 1: Location input and Person counter -->
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-5 w-full">
+              <!-- Location Input -->
               <input
                 type="text"
                 id="searchLocation"
                 placeholder="Bạn muốn đi đâu ?..."
-                class="bg-[#F2F6F9] md:w-3xs 2xl:w-md md:h-[40px] 2xl:h-[60px] rounded-lg px-5 font-openSans font-semibold 2xl:text-xl"
+                class="bg-[#F2F6F9] w-full sm:flex-1 h-[45px] sm:h-[50px] lg:h-[55px] 2xl:h-[60px] rounded-lg px-4 sm:px-5 font-openSans font-semibold text-sm sm:text-base lg:text-lg 2xl:text-xl"
               />
-              <!-- số lượng người -->
-              <div class="flex flex-row gap-2 bg-[#F2F6F9] rounded-lg pl-3">
+
+              <!-- Person Counter -->
+              <div
+                class="flex flex-row gap-2 bg-[#F2F6F9] justify-between rounded-lg pl-3 pr-2 min-w-fit"
+              >
                 <label
-                  class="flex items-center justify-center font-bold font-openSans text-lg 2xl:text-xl"
+                  class="flex items-center justify-center font-bold font-openSans text-sm sm:text-base lg:text-lg 2xl:text-xl whitespace-nowrap"
                 >
                   Người
                 </label>
                 <div
-                  class="flex flex-row items-center gap-1 justify-center border-1 rounded-sm border-black"
+                  class="flex flex-row items-center gap-1 justify-center border border-gray-300 rounded-sm"
                 >
-                  <!-- btn giảm -->
+                  <!-- Decrease button -->
                   <button
                     onclick="handleDecrement()"
-                    class="md:w-[30px] md:h-[20px] 2xl:h-[60px] 2xl:w-[40px] cursor-pointer"
+                    class="w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] lg:w-[45px] lg:h-[45px] 2xl:w-[50px] 2xl:h-[50px] cursor-pointer flex items-center justify-center hover:bg-gray-100 transition-colors"
                   >
-                    <i class="fa-solid fa-minus"></i>
+                    <i class="fa-solid fa-minus text-xs sm:text-sm"></i>
                   </button>
+
                   <input
                     readonly
                     id="inputQtyPerson"
@@ -91,35 +111,43 @@
                     type="number"
                     placeholder="1"
                     min="0"
-                    class="md:w-[30px] md:h-[40px] px-1 font-openSans font-semibold text-black focus:outline-none"
+                    class="w-[40px] h-[35px] sm:h-[40px] lg:h-[45px] 2xl:h-[50px] px-1 font-openSans font-semibold text-black focus:outline-none text-center text-sm sm:text-base"
                   />
-                  <!-- btn tăng -->
+
+                  <!-- Increase button -->
                   <button
                     onclick="handleIncrement()"
-                    class="md:w-[30px] md:h-[20px] 2xl:w-[40px] cursor-pointer"
+                    class="w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] lg:w-[45px] lg:h-[45px] 2xl:w-[50px] 2xl:h-[50px] cursor-pointer flex items-center justify-center hover:bg-gray-100 transition-colors"
                   >
-                    <i class="fa-solid fa-plus"></i>
+                    <i class="fa-solid fa-plus text-xs sm:text-sm"></i>
                   </button>
                 </div>
               </div>
             </div>
-            <div class="flex flex-row gap-5">
+
+            <!-- Row 2: Date inputs and Search button -->
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-5 w-full">
+              <!-- Check-in Date -->
               <input
                 id="InputcheckIn"
                 onchange="validateCheckIn()"
                 type="date"
-                class="bg-[#F2F6F9] md:w-[150px] md:h-[40px] 2xl:h-[60px] 2xl:w-[230px] rounded-lg px-3 2xl:text-xl font-openSans font-semibold"
+                class="bg-[#F2F6F9] w-full sm:w-[140px] md:w-[160px] lg:w-[230px] h-[45px] sm:h-[50px] lg:h-[55px] 2xl:h-[60px] rounded-lg px-3 text-sm sm:text-base lg:text-lg 2xl:text-xl font-openSans font-semibold"
               />
+
+              <!-- Check-out Date -->
               <input
                 onchange="validateDateRange()"
                 id="InputcheckOut"
                 type="date"
-                class="bg-[#F2F6F9] md:w-[150px] md:h-[40px] 2xl:h-[60px] 2xl:w-[230px] 2xl:text-xl rounded-lg px-3 font-openSans font-semibold"
+                class="bg-[#F2F6F9] w-full sm:w-[140px] md:w-[160px] lg:w-[230px] h-[45px] sm:h-[50px] lg:h-[55px] 2xl:h-[60px] rounded-lg px-3 text-sm sm:text-base lg:text-lg 2xl:text-xl font-openSans font-semibold"
               />
+
+              <!-- Search Button -->
               <button
                 onclick="handleSubmit()"
                 id="btnSearch"
-                class="bg-primary md:w-[120px] md:h-[40px] 2xl:h-[60px] 2xl:w-[170px] rounded-lg font-bold font-openSans text-xl text-white 2xl:text-2xl cursor-pointer hover:bg-primary/90"
+                class="bg-primary w-full sm:w-[120px] md:w-[140px] lg:w-[200px] h-[45px] sm:h-[50px] lg:h-[55px] 2xl:h-[60px] rounded-lg font-bold font-openSans text-base sm:text-lg lg:text-xl 2xl:text-2xl text-white cursor-pointer hover:bg-primary/90 transition-colors duration-200"
               >
                 Tìm kiếm
               </button>
@@ -128,59 +156,81 @@
         </div>
       </section>
 
-      <!--  -->
-      <section class="mt-10">
+      <!-- Tính năng nổi bật -->
+      <section class="mt-8 sm:mt-10 lg:mt-12">
         <div>
-          <h3 class="text-center text-3xl font-openSans font-bold">
+          <h3
+            class="text-center text-2xl sm:text-3xl lg:text-4xl font-openSans font-bold mb-6 sm:mb-8 lg:mb-10"
+          >
             Tính năng nổi bật
           </h3>
+
           <div
-            class="flex gap-5 md:flex-row flex-col justify-center items-center mt-10 max-w-4xl mx-auto"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 max-w-6xl mx-auto px-2 sm:px-4"
           >
+            <!-- Feature 1: Tìm kiếm dễ dàng -->
             <article
-              class="bg-white flex flex-col justify-center items-center gap-3 w-md max-h-[300px] p-5 shadow-md"
+              class="bg-white flex flex-col justify-center items-center gap-3 sm:gap-4 w-full max-w-sm mx-auto p-5 sm:p-6 lg:p-8 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-lg"
             >
-              <p
-                class="w-[50px] h-[50px] bg-[#D9D9D9] rounded-full flex justify-center items-center"
+              <div
+                class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] bg-[#D9D9D9] rounded-full flex justify-center items-center"
               >
-                <img src="./imgs/iconKinhLup.png" alt="" class="w-[30px]" />
-              </p>
-              <h5 class="text-center text-xl font-openSans font-bold">
+                <img
+                  src="./imgs/iconKinhLup.png"
+                  alt="Search icon"
+                  class="w-[30px] sm:w-[35px]"
+                />
+              </div>
+              <h5
+                class="text-center text-lg sm:text-xl lg:text-2xl font-openSans font-bold"
+              >
                 Tìm kiếm dễ dàng
               </h5>
-              <p class="text-center text-sm">
+              <p
+                class="text-center text-sm sm:text-base text-gray-600 leading-relaxed"
+              >
                 Tìm kiếm phòng với sở thích của bạn một cách nhanh chóng
               </p>
             </article>
 
+            <!-- Feature 2: Đặt phòng trực tuyến -->
             <article
-              class="bg-white flex flex-col justify-center items-center gap-3 w-md max-h-[300px] p-5 shadow-md"
+              class="bg-white flex flex-col justify-center items-center gap-3 sm:gap-4 w-full max-w-sm mx-auto p-5 sm:p-6 lg:p-8 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-lg"
             >
-              <p
-                class="w-[50px] h-[50px] bg-[#D9D9D9] rounded-full flex justify-center items-center text-3xl"
+              <div
+                class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] bg-[#D9D9D9] rounded-full flex justify-center items-center text-2xl sm:text-3xl"
               >
                 🏨
-              </p>
-              <h5 class="text-center text-xl font-openSans font-bold">
+              </div>
+              <h5
+                class="text-center text-lg sm:text-xl lg:text-2xl font-openSans font-bold"
+              >
                 Đặt phòng trực tuyến
               </h5>
-              <p class="text-center text-sm">
+              <p
+                class="text-center text-sm sm:text-base text-gray-600 leading-relaxed"
+              >
                 Đặt phòng trực tuyến chỉ với vài cú nhấp chuột
               </p>
             </article>
 
+            <!-- Feature 3: Đánh giá chân thực -->
             <article
-              class="bg-white flex flex-col justify-center items-center gap-3 w-md max-h-[300px] p-5 shadow-md"
+              class="bg-white flex flex-col justify-center items-center gap-3 sm:gap-4 w-full max-w-sm mx-auto p-5 sm:p-6 lg:p-8 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-lg md:col-span-2 lg:col-span-1"
             >
-              <p
-                class="w-[50px] h-[50px] bg-[#D9D9D9] rounded-full flex justify-center items-center text-3xl"
+              <div
+                class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] bg-[#D9D9D9] rounded-full flex justify-center items-center text-2xl sm:text-3xl"
               >
                 ⭐
-              </p>
-              <h5 class="text-center text-xl font-openSans font-bold">
+              </div>
+              <h5
+                class="text-center text-lg sm:text-xl lg:text-2xl font-openSans font-bold"
+              >
                 Đánh giá chân thực
               </h5>
-              <p class="text-center text-sm">
+              <p
+                class="text-center text-sm sm:text-base text-gray-600 leading-relaxed"
+              >
                 Xem đánh giá chân thực từ những khách hàng trước đây
               </p>
             </article>

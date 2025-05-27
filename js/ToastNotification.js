@@ -53,7 +53,10 @@ export const showToast = (msg, typeMsg = "success") => {
   toast.className = `w-[400px] h-[80px] relative bg-white font-medium my-4 shadow-md flex items-center rounded-md overflow-hidden`;
 
   // Thêm phần tử con cho progress bar thay vì dùng ::after
-  const progressClass = toastType === "success" ? "bg-green-500" : "bg-red-500";
+  const progressClass =
+    toastType === "success"
+      ? "bg-green-500 animate-progress"
+      : "bg-red-500 animate-progress";
 
   toast.innerHTML = `
       <div class="p-4 flex items-center gap-3 w-full">

@@ -42,25 +42,23 @@
     <!-- Dùng để load component header và footer -->
     <script src="./js/layout.js"></script>
   </head>
-  <body>
+  <body class="min-h-screen bg-gray-50">
     <!-- Phần container cho header -->
     <div id="header-container"></div>
 
     <!-- phần container cho content -->
-    <main class="max-h-screen my-30 flex flex-col justify-center items-center">
-      <section class="w-lg shadow-sm inset-shadow-sm">
-        <div
-          class="flex flex-col gap-5 justify-center items-center px-5 py-5 rounded-sm"
-        >
-          <div>
-            <h3 class="text-primary text-3xl uppercase font-openSans font-bold">
+    <main class="min-h-screen flex flex-col justify-center items-center px-4 py-8 sm:px-6 lg:px-8">
+      <section class="w-full max-w-md sm:max-w-lg lg:max-w-xl shadow-lg bg-white rounded-lg">
+        <div class="flex flex-col gap-4 sm:gap-5 justify-center items-center px-6 sm:px-8 lg:px-10 py-6 sm:py-8 lg:py-10 rounded-sm">
+          <!-- Title -->
+          <div class="w-full text-center">
+            <h3 class="text-primary text-2xl sm:text-3xl lg:text-4xl uppercase font-openSans font-bold">
               Đăng ký
             </h3>
           </div>
-          <!-- Nhóm chọn hình thức đăng ký (Email / Số điện thoại) -->
-          <!-- Mỗi option: radio ẩn + custom UI + nhãn -->
-          <!-- ID spanRadioEmail / spanRadioSdt dùng cho thao tác JS -->
-          <div class="flex flex-row justify-around w-sm">
+
+          <!-- Radio Selection: Email/Phone -->
+          <div class="flex flex-row justify-around w-full max-w-sm">
             <div>
               <label for="email" class="flex items-center cursor-pointer gap-2">
                 <div class="relative">
@@ -72,16 +70,16 @@
                     class="hidden"
                   />
                   <div
-                    class="radio-circle w-5 h-5 rounded-full border-2 border-gray-400 flex items-center justify-center"
+                    class="radio-circle w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-gray-400 flex items-center justify-center"
                   >
                     <div
-                      class="radio-dot w-2.5 h-2.5 rounded-full bg-white"
+                      class="radio-dot w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-white"
                     ></div>
                   </div>
                 </div>
                 <span
                   id="spanRadioEmail"
-                  class="text-base font-medium text-black"
+                  class="text-sm sm:text-base font-medium text-black"
                   >Email</span
                 >
               </label>
@@ -91,83 +89,89 @@
                 <div class="relative">
                   <input type="radio" name="register" id="sdt" class="hidden" />
                   <div
-                    class="radio-circle w-5 h-5 rounded-full border-2 border-gray-400 flex items-center justify-center"
+                    class="radio-circle w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-gray-400 flex items-center justify-center"
                   >
                     <div
-                      class="radio-dot w-2.5 h-2.5 rounded-full bg-white"
+                      class="radio-dot w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-white"
                     ></div>
                   </div>
                 </div>
-                <span id="spanRadioSdt" class="text-base font-medium text-black"
+                <span id="spanRadioSdt" class="text-sm sm:text-base font-medium text-black"
                   >Số điện thoại</span
                 >
               </label>
             </div>
           </div>
 
-          <!-- Nhóm nhập Email / SĐT -->
-          <!-- Label + input text + span lỗi -->
-          <!-- Placeholder mặc định = Email (sẽ đổi nếu chọn SĐT) -->
-          <div class="flex flex-col gap-1">
+          <!-- Email/Phone Input -->
+          <div class="flex flex-col gap-1 w-full">
             <label
               for="valueRegister"
-              class="pl-1 font-openSans font-semibold text-lg cursor-pointer"
+              class="pl-1 font-openSans font-semibold text-base sm:text-lg cursor-pointer"
               id="LableValueRegister"
               >Email hoặc số điện thoại</label
             >
             <input
-              class="px-3 bg-gray-200 text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
+              class="px-3 bg-gray-200 text-base sm:text-lg w-full py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-2 sm:focus:outline-3 rounded-lg focus:outline-offset-1 transition-all duration-200"
               type="text"
               id="valueRegister"
               placeholder="Nhập Email"
             />
             <label
-              class="pl-2 text-sm text-red-500 font-openSans font-medium"
+              class="pl-2 text-sm text-red-500 font-openSans font-medium min-h-[1.25rem]"
               id="errorMesageValueRegister"
             >
             </label>
           </div>
 
-          <div class="flex flex-col gap-1">
-            <label
-              for="lastName"
-              class="pl-1 font-openSans font-semibold text-lg cursor-pointer"
-              >Họ</label
-            >
-            <input
-              class="px-3 bg-gray-200 text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
-              type="text"
-              id="lastName"
-              placeholder="Nhập họ"
-            />
-            <label
-              class="pl-2 text-sm text-red-500 font-openSans font-medium"
-              id="errorMesageLastName"
-            >
-            </label>
+          <!-- First Name and Last Name - Responsive Grid -->
+          <div class="flex flex-col sm:flex-row gap-4 w-full">
+            <!-- Last Name -->
+            <div class="flex flex-col gap-1 flex-1">
+              <label
+                for="lastName"
+                class="pl-1 font-openSans font-semibold text-base sm:text-lg cursor-pointer"
+                >Họ</label
+              >
+              <input
+                class="px-3 bg-gray-200 text-base sm:text-lg w-full py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-2 sm:focus:outline-3 rounded-lg focus:outline-offset-1 transition-all duration-200"
+                type="text"
+                id="lastName"
+                placeholder="Nhập họ"
+              />
+              <label
+                class="pl-2 text-sm text-red-500 font-openSans font-medium min-h-[1.25rem]"
+                id="errorMesageLastName"
+              >
+              </label>
+            </div>
+
+            <!-- First Name -->
+            <div class="flex flex-col gap-1 flex-1">
+              <label
+                for="firstName"
+                class="pl-1 font-openSans font-semibold text-base sm:text-lg cursor-pointer"
+                >Tên</label
+              >
+              <input
+                class="px-3 bg-gray-200 text-base sm:text-lg w-full py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-2 sm:focus:outline-3 rounded-lg focus:outline-offset-1 transition-all duration-200"
+                type="text"
+                id="firstName"
+                placeholder="Nhập Tên"
+              />
+              <label
+                class="pl-2 text-sm text-red-500 font-openSans font-medium min-h-[1.25rem]"
+                id="errorMesageFirstName"
+              >
+              </label>
+            </div>
           </div>
-          <div class="flex flex-col gap-1">
-            <label
-              for="firstName"
-              class="pl-1 font-openSans font-semibold text-lg cursor-pointer"
-              >Tên</label
-            >
-            <input
-              class="px-3 bg-gray-200 text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
-              type="text"
-              id="firstName"
-              placeholder="Nhập Tên"
-            />
-            <label
-              class="pl-2 text-sm text-red-500 font-openSans font-medium"
-              id="errorMesageFirstName"
-            >
-            </label>
-          </div>
-          <div class="flex flex-col gap-1 relative">
+
+          <!-- Password Input -->
+          <div class="flex flex-col gap-1 relative w-full">
             <label
               for="password"
-              class="pl-1 font-openSans font-semibold text-lg cursor-pointer"
+              class="pl-1 font-openSans font-semibold text-base sm:text-lg cursor-pointer"
             >
               Mật khẩu
             </label>
@@ -175,26 +179,28 @@
               <input
                 type="password"
                 id="password"
-                class="passwordInput px-3 bg-gray-200 text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
+                class="passwordInput px-3 bg-gray-200 text-base sm:text-lg w-full py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-2 sm:focus:outline-3 rounded-lg focus:outline-offset-1 transition-all duration-200 pr-12"
                 placeholder="Mật khẩu"
               />
               <span
                 id="hideShowPassword"
-                class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 hover:text-gray-700 transition-colors duration-200"
                 onclick="togglePassword()"
               >
               </span>
             </div>
             <label
-              class="pl-2 text-sm text-red-500 font-openSans font-medium"
+              class="pl-2 text-sm text-red-500 font-openSans font-medium min-h-[1.25rem]"
               id="errorMesagePassword"
             >
             </label>
           </div>
-          <div class="flex flex-col gap-1 relative">
+
+          <!-- Confirm Password Input -->
+          <div class="flex flex-col gap-1 relative w-full">
             <label
               for="RePassword"
-              class="pl-1 font-openSans font-semibold text-lg cursor-pointer"
+              class="pl-1 font-openSans font-semibold text-base sm:text-lg cursor-pointer"
             >
               Nhập lại mật khẩu
             </label>
@@ -202,35 +208,36 @@
               <input
                 type="password"
                 id="RePassword"
-                class="passwordInput px-3 bg-gray-200 text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
+                class="passwordInput px-3 bg-gray-200 text-base sm:text-lg w-full py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-2 sm:focus:outline-3 rounded-lg focus:outline-offset-1 transition-all duration-200 pr-12"
                 placeholder="Nhập lại mật khẩu"
               />
               <span
                 id="hideShowRePassword"
-                class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 hover:text-gray-700 transition-colors duration-200"
                 onclick="togglePassword()"
               >
               </span>
             </div>
             <label
-              class="pl-2 text-sm text-red-500 font-openSans font-medium"
+              class="pl-2 text-sm text-red-500 font-openSans font-medium min-h-[1.25rem]"
               id="errorMesageRePassword"
             >
             </label>
           </div>
 
-          <div class="flex flex-col gap-3 justify-center items-center">
+          <!-- Submit Button & Login Link -->
+          <div class="flex flex-col gap-4 justify-center items-center w-full">
             <button
               onclick="handleSubmit()"
-              class="bg-primary text-2xl text-white w-xs py-3 cursor-pointer rounded-lg font-openSans font-bold hover:bg-blue-700"
+              class="bg-primary text-xl sm:text-2xl text-white w-full max-w-xs py-3 cursor-pointer rounded-lg font-openSans font-bold hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
               Đăng ký
             </button>
-            <p class="text-[#9E9E9E] font-openSans font-medium">
+            <p class="text-[#9E9E9E] font-openSans font-medium text-center text-sm sm:text-base">
               Bạn đã có tài khoản?
               <a
                 href="./login.html"
-                class="font-openSans font-bold text-primary"
+                class="font-openSans font-bold text-primary hover:text-blue-700 transition-colors duration-200"
                 >Đăng nhập ngay</a
               >
             </p>

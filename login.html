@@ -20,7 +20,6 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
-    
       @theme {
         --color-primary: #2464ec;
         --color-secondary: #f0f3f8;
@@ -40,48 +39,57 @@
         }
       }
     </style>
-    <!-- Dùng để load component header và footer -->
-    <link rel="stylesheet" href="./css/style.css" />
-
     <script src="./js/layout.js"></script>
   </head>
-  <body>
+  <body class="min-h-screen bg-gray-50">
     <!-- Phần container cho header -->
     <div id="header-container"></div>
 
     <!-- phần container cho content -->
-    <main class="max-h-screen my-30 flex flex-col justify-center items-center">
-      <section class="w-lg shadow-sm inset-shadow-sm">
+    <main
+      class="min-h-screen flex flex-col justify-center items-center px-4 py-8 sm:px-6 lg:px-8"
+    >
+      <section
+        class="w-full max-w-md sm:max-w-lg lg:max-w-xl shadow-lg bg-white rounded-lg"
+      >
         <div
-          class="flex flex-col gap-8 justify-center items-center px-5 py-10 rounded-sm"
+          class="flex flex-col gap-6 sm:gap-8 justify-center items-center px-6 sm:px-8 lg:px-10 py-8 sm:py-10 lg:py-12"
         >
-          <div>
-            <h3 class="text-primary text-3xl uppercase font-openSans font-bold">
+          <!-- Title -->
+          <div class="w-full text-center">
+            <h3
+              class="text-primary text-2xl sm:text-3xl lg:text-4xl uppercase font-openSans font-bold"
+            >
               Đăng nhập
             </h3>
           </div>
-          <div class="flex flex-col gap-1">
+
+          <!-- Email/Phone Input -->
+          <div class="flex flex-col gap-1 w-full">
             <label
               for="valueLogin"
-              class="pl-1 font-openSans font-semibold text-lg cursor-pointer"
-              >Email hoặc số điện thoại</label
+              class="pl-1 font-openSans font-semibold text-base sm:text-lg cursor-pointer"
             >
+              Email hoặc số điện thoại
+            </label>
             <input
-              class="px-3 bg-secondary text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
+              class="px-3 bg-secondary text-base sm:text-lg w-full py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-2 sm:focus:outline-3 rounded-lg focus:outline-offset-1 transition-all duration-200"
               type="text"
               id="valueLogin"
               placeholder="Nhập Email hoặc số điện thoại"
             />
             <label
-              class="pl-2 text-sm text-red-500 font-openSans font-medium"
+              class="pl-2 text-sm text-red-500 font-openSans font-medium min-h-[1.25rem]"
               id="errorMesageValueLogin"
             >
             </label>
           </div>
-          <div class="flex flex-col gap-1 relative">
+
+          <!-- Password Input -->
+          <div class="flex flex-col gap-1 relative w-full">
             <label
               for="password"
-              class="pl-1 font-openSans font-semibold text-lg cursor-pointer"
+              class="pl-1 font-openSans font-semibold text-base sm:text-lg cursor-pointer"
             >
               Mật khẩu
             </label>
@@ -89,24 +97,28 @@
               <input
                 type="password"
                 id="password"
-                class="px-3 bg-secondary text-lg w-sm py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-3 rounded-lg focus:outline-offset-1"
+                class="px-3 bg-secondary text-base sm:text-lg w-full py-3 font-openSans font-medium focus:outline-[#2464EC] focus:outline-2 sm:focus:outline-3 rounded-lg focus:outline-offset-1 transition-all duration-200 pr-12"
                 placeholder="Mật khẩu"
                 onchange="handleOnChangePassword()"
               />
               <span
                 id="hideShowPassword"
-                class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 hover:text-gray-700 transition-colors duration-200"
                 onclick="togglePassword()"
               >
               </span>
             </div>
             <label
-              class="pl-2 text-sm text-red-500 font-openSans font-medium"
+              class="pl-2 text-sm text-red-500 font-openSans font-medium min-h-[1.25rem]"
               id="errorMesagePassword"
             >
             </label>
           </div>
-          <div class="flex flex-row justify-between w-sm px-1">
+
+          <!-- Remember Login & Forgot Password -->
+          <div
+            class="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full px-1 gap-3 sm:gap-0"
+          >
             <!-- Check box ghi nhớ đăng nhập -->
             <div class="inline-flex items-center">
               <label
@@ -116,7 +128,7 @@
                 <input
                   type="checkbox"
                   checked
-                  class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border-2 border-primary checked:bg-blue-800 checked:border-blue-800"
+                  class="peer h-4 w-4 sm:h-5 sm:w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border-2 border-primary checked:bg-blue-800 checked:border-blue-800"
                   id="rememberLogin"
                 />
                 <span
@@ -124,7 +136,7 @@
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-3.5 w-3.5"
+                    class="h-3 w-3 sm:h-3.5 sm:w-3.5"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                     stroke="currentColor"
@@ -146,27 +158,37 @@
               </label>
             </div>
 
-            <a class="text-sm font-medium text-blue-700">Quên mật khẩu</a>
+            <a
+              class="text-sm font-medium text-blue-700 hover:text-blue-800 cursor-pointer transition-colors duration-200"
+            >
+              Quên mật khẩu?
+            </a>
           </div>
-          <div class="flex flex-col gap-3 justify-center items-center">
+
+          <!-- Submit Button & Register Link -->
+          <div class="flex flex-col gap-4 justify-center items-center w-full">
             <button
               onclick="handleSubmit()"
-              class="bg-primary text-2xl text-white w-xs py-3 cursor-pointer rounded-lg font-openSans font-bold hover:bg-blue-700"
+              class="bg-primary text-xl sm:text-2xl text-white w-full max-w-xs py-3 cursor-pointer rounded-lg font-openSans font-bold hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
               Đăng nhập
             </button>
-            <p class="text-[#9E9E9E] font-openSans font-medium">
+            <p
+              class="text-[#9E9E9E] font-openSans font-medium text-center text-sm sm:text-base"
+            >
               Bạn chưa có tài khoản?
               <a
                 href="register.html"
-                class="font-openSans font-bold text-primary"
-                >Đăng ký ngay</a
+                class="font-openSans font-bold text-primary hover:text-blue-700 transition-colors duration-200"
               >
+                Đăng ký ngay
+              </a>
             </p>
           </div>
         </div>
       </section>
     </main>
+
     <!-- Phần container cho footer -->
     <div id="footer-container"></div>
 
